@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Equipamiento de Consultorios — Metrored</title>
+<style>
+  :root{
+    --azul:#0e7490; --azul-osc:#155e75; --teal:#0d9488; --verde:#16a34a;
+    --rojo:#dc2626; --amber:#d97706; --gris:#64748b; --gris-cl:#f1f5f9;
+    --linea:#e2e8f0; --texto:#0f172a; --bg:#f8fafc; --radio:14px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg);color:var(--texto);font-size:16px;line-height:1.45}
+  header{background:linear-gradient(135deg,var(--azul),var(--teal));color:#fff;
+       padding:14px 18px;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+  header h1{margin:0;font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
+  header .sub{font-size:12.5px;opacity:.9;margin-top:2px}
+  .wrap{max-width:880px;margin:0 auto;padding:16px}
+  /* Stepper */
+  .stepper{display:flex;gap:6px;margin:14px auto;max-width:880px;padding:0 16px}
+  .stepper .st{flex:1;text-align:center;font-size:12.5px;font-weight:600;color:var(--gris);
+       padding:8px 4px;border-radius:10px;background:#fff;border:1px solid var(--linea)}
+  .stepper .st.act{background:var(--azul);color:#fff;border-color:var(--azul)}
+  .stepper .st.done{background:#e0f2fe;color:var(--azul-osc);border-color:#bae6fd}
+  /* Cards */
+  .card{background:#fff;border:1px solid var(--linea);border-radius:var(--radio);
+       padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .card h2{margin:0 0 14px;font-size:17px;color:var(--azul-osc)}
+  label{display:block;font-size:13px;font-weight:600;color:#334155;margin:0 0 6px}
+  .req::after{content:" *";color:var(--rojo)}
+  input,select,textarea{width:100%;padding:12px 12px;border:1.5px solid var(--linea);
+       border-radius:10px;font-size:16px;background:#fff;color:var(--texto);font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(14,116,144,.12)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid .full{grid-column:1/-1}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  /* Botones */
+  .btns{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:15px;font-weight:600;border:none;border-radius:10px;
+       padding:13px 18px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:7px;justify-content:center}
+  .btn-pri{background:var(--azul);color:#fff;flex:1;min-width:140px}
+  .btn-pri:hover{background:var(--azul-osc)}
+  .btn-sec{background:#fff;color:var(--azul);border:1.5px solid var(--azul)}
+  .btn-ok{background:var(--verde);color:#fff;flex:1;min-width:140px}
+  .btn-ghost{background:var(--gris-cl);color:#334155}
+  .btn-danger{background:#fee2e2;color:var(--rojo)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  /* Acordeón de categorías */
+  .acc{border:1px solid var(--linea);border-radius:12px;margin-bottom:12px;overflow:hidden}
+  .acc-h{display:flex;align-items:center;justify-content:space-between;gap:10px;
+       padding:14px 16px;background:var(--gris-cl);cursor:pointer;user-select:none}
+  .acc-h .ti{font-weight:700;font-size:15px;color:var(--azul-osc);display:flex;align-items:center;gap:9px}
+  .acc-h .badge{background:#fff;border:1px solid var(--linea);border-radius:999px;
+       font-size:12px;font-weight:700;color:var(--gris);padding:2px 10px}
+  .acc-h .chev{transition:.2s;color:var(--gris)}
+  .acc.open .chev{transform:rotate(180deg)}
+  .acc-b{display:none;padding:6px 14px 14px}
+  .acc.open .acc-b{display:block}
+  .sub-h{font-size:12.5px;font-weight:700;color:var(--teal);text-transform:uppercase;
+       letter-spacing:.03em;margin:14px 4px 6px;border-bottom:1px dashed var(--linea);padding-bottom:4px}
+  /* Ítem */
+  .item{padding:12px 4px;border-bottom:1px solid var(--linea)}
+  .item:last-child{border-bottom:none}
+  .item .nm{font-size:14.5px;font-weight:600;margin-bottom:8px}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .cond{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;width:100%;
+       background:#fff7ed;border:1px dashed #fdba74;border-radius:10px;padding:8px 10px;margin-top:2px}
+  .ctl{display:flex;flex-direction:column;gap:3px}
+  .ctl small{font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase}
+  .ctl.num input{width:108px}
+  .ctl.obs{flex:1;min-width:160px}
+  /* Toggle cumple */
+  .toggle{display:inline-flex;border:1.5px solid var(--linea);border-radius:10px;overflow:hidden}
+  .toggle button{padding:10px 14px;border-radius:0;background:#fff;color:var(--gris);font-size:13.5px;border:none}
+  .toggle button.si.on{background:var(--verde);color:#fff}
+  .toggle button.no.on{background:var(--rojo);color:#fff}
+  /* Resumen */
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--linea);font-size:14px}
+  .kv b{color:var(--azul-osc)}
+  .pill{display:inline-block;background:#e0f2fe;color:var(--azul-osc);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:700}
+  /* Historial */
+  .hist-row{display:flex;justify-content:space-between;align-items:center;gap:10px;
+       padding:12px;border:1px solid var(--linea);border-radius:10px;margin-bottom:8px}
+  .hist-row .meta{font-size:13.5px}
+  .hist-row .meta small{color:var(--gris);display:block;margin-top:2px}
+  .hist-row .ops{display:flex;gap:6px}
+  .hist-row .ops button{padding:8px 12px;font-size:13px}
+  /* Toast */
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0f172a;color:#fff;
+       padding:12px 20px;border-radius:10px;font-size:14px;z-index:100;opacity:0;transition:.3s;pointer-events:none;max-width:90%}
+  .toast.show{opacity:1}
+  /* Modal */
+  .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;z-index:90;padding:16px}
+  .modal.show{display:flex}
+  .modal .box{background:#fff;border-radius:14px;max-width:680px;width:100%;max-height:85vh;overflow:auto;padding:20px}
+  .hide{display:none!important}
+  .hint{font-size:12.5px;color:var(--gris);margin-top:6px}
+  .err{color:var(--rojo);font-size:13px;margin-top:8px;font-weight:600}
+  .banner{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#fef9c3;border:1.5px solid #fde047;
+       border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:14px;color:#713f12;font-weight:600}
+  .tabbar{display:flex;gap:8px;margin-bottom:16px}
+  .tabbar button{flex:1;background:#fff;border:1px solid var(--linea);color:var(--gris)}
+  .tabbar button.act{background:var(--azul);color:#fff;border-color:var(--azul)}
+  .empty{text-align:center;color:var(--gris);padding:30px 10px;font-size:14px}
+  /* Desplegable propio (compatible con iPhone/Android/PC) */
+  .combo{position:relative}
+  .combo-list{position:absolute;left:0;right:0;top:calc(100% + 2px);z-index:60;background:#fff;
+       border:1.5px solid var(--azul);border-radius:10px;max-height:260px;overflow:auto;
+       box-shadow:0 8px 22px rgba(0,0,0,.16);-webkit-overflow-scrolling:touch}
+  .combo-opt{padding:13px 14px;cursor:pointer;font-size:16px;border-bottom:1px solid var(--gris-cl)}
+  .combo-opt:last-child{border-bottom:none}
+  .combo-opt:active,.combo-opt.active{background:#e0f2fe}
+  @media(hover:hover){.combo-opt:hover{background:#e0f2fe}}
+  .combo-empty{padding:13px 14px;color:var(--gris);font-size:14px}
+  /* ===== Responsive: celular ===== */
+  @media(max-width:600px){
+    body{font-size:15px}
+    .wrap{padding:12px}
+    header{padding:18px 16px}
+    header h1{font-size:18px}
+    .stepper{padding:0 12px;gap:5px;margin:12px auto}
+    .stepper .st{font-size:11px;padding:7px 3px}
+    section,.card{padding:15px}
+    .tabbar{padding:12px 12px 0}
+    .acc-h{padding:12px 13px}
+    .controls{gap:8px}
+    .ctl.num input{width:46%}
+    .ctl.obs{min-width:100%}
+    .hist-row{flex-wrap:wrap}
+    .hist-row .ops{width:100%}
+    .hist-row .ops button{flex:1}
+    .btns{flex-direction:column}
+    .btns button{width:100%}
+  }
+  /* ===== Responsive: tablet ===== */
+  @media(min-width:601px) and (max-width:900px){
+    .wrap,.stepper{max-width:100%}
+  }
+  /* ===== Ficha profesional (Revisar / Ver registro) ===== */
+  .ficha-head{background:linear-gradient(135deg,var(--azul),var(--teal));color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:14px}
+  .ft-title{font-size:17px;font-weight:800;line-height:1.2}
+  .ft-sub{font-size:13.5px;opacity:.93;margin-top:3px}
+  .ficha-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px}
+  .fld{background:var(--gris-cl);border-radius:10px;padding:9px 12px}
+  .fld small{display:block;font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.02em;margin-bottom:2px}
+  .fld b{font-size:14.5px;color:var(--texto);font-weight:700}
+  .obs-note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:14px;color:#713f12}
+  .obs-note small{display:block;font-size:11px;font-weight:700;text-transform:uppercase;color:#a16207;margin-bottom:3px}
+  .cat-sec{border:1px solid var(--linea);border-radius:12px;overflow:hidden;margin-bottom:12px;background:#fff}
+  .cat-h{background:var(--gris-cl);padding:10px 14px;font-weight:700;color:var(--azul-osc);font-size:14.5px;display:flex;align-items:center;gap:8px}
+  .cat-count{margin-left:auto;background:#fff;border:1px solid var(--linea);border-radius:999px;font-size:12px;font-weight:700;color:var(--gris);padding:1px 9px}
+  .det-item{padding:11px 14px;border-top:1px solid var(--linea)}
+  .di-nm{font-size:14px;font-weight:600;margin-bottom:6px}
+  .di-badges{display:flex;flex-wrap:wrap;gap:6px}
+  .det-obs{font-size:13px;color:#475569;font-style:italic;margin-top:6px;background:#f8fafc;border-radius:8px;padding:6px 10px}
+  .badge{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:700;white-space:nowrap}
+  .b-si{background:#dcfce7;color:#166534}
+  .b-no{background:#fee2e2;color:#991b1b}
+  .b-cant{background:#dbeafe;color:#1e40af}
+  .b-repo{background:#fef9c3;color:#854d0e}
+  .b-reti{background:#ffe4e6;color:#9f1239}
+  .b-neutral{background:var(--gris-cl);color:var(--gris)}
+  .modal-h3{font-size:14px;color:var(--azul-osc);margin:8px 0 12px;font-weight:700;border-top:1px solid var(--linea);padding-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  @media(max-width:600px){ .ficha-grid{grid-template-columns:1fr 1fr} }
+  /* ===== Impresión / Descargar PDF ===== */
+  #printArea{display:none}
+  @media print{
+    @page{ margin:12mm }
+    body{ background:#fff!important }
+    body>*{ display:none!important }
+    #printArea{ display:block!important }
+    #printArea *{ -webkit-print-color-adjust:exact; print-color-adjust:exact }
+    .print-reg{ page-break-after:always }
+    .print-reg:last-child{ page-break-after:auto }
+    .print-hd{ font-size:12px; font-weight:800; color:#0e7490; margin-bottom:12px; border-bottom:2px solid #0e7490; padding-bottom:6px }
+    .ficha-head{ background:#0e7490!important }
+    .cat-sec,.det-item{ page-break-inside:avoid }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🏥 Equipamiento de Consultorios</h1>
+  <div class="sub">Metrored — registro de desinfección, verificación, reposición y coche de paro</div>
+</header>
+
+<div class="tabbar wrap" style="padding-top:16px;padding-bottom:0">
+  <button id="tabNuevo" class="act" onclick="irTab('nuevo')">➕ Nuevo registro</button>
+  <button id="tabHist" onclick="irTab('hist')">🗂️ Historial (<span id="histCount">0</span>)</button>
+</div>
+
+<!-- ====== NUEVO REGISTRO ====== -->
+<div id="vistaNuevo">
+  <div class="stepper">
+    <div class="st act" id="stp1">1 · Datos generales</div>
+    <div class="st" id="stp2">2 · Checklist</div>
+    <div class="st" id="stp3">3 · Revisar y guardar</div>
+  </div>
+  <div class="wrap">
+
+    <!-- Aviso de borrador sin terminar -->
+    <div id="draftBanner" class="banner hide">
+      <div class="info" style="flex:1"></div>
+      <div class="btns" style="margin:0">
+        <button class="btn-pri" style="flex:none" onclick="continuarDraft()">Continuar</button>
+        <button class="btn-ghost" onclick="descartarDraft()">Descartar</button>
+      </div>
+    </div>
+
+    <!-- PASO 1 -->
+    <div id="paso1" class="card">
+      <h2>Datos generales</h2>
+      <div class="grid">
+        <div>
+          <label class="req" for="centro">Centro médico</label>
+          <input id="centro" autocomplete="off" placeholder="🔎 Escribe o elige el centro">
+        </div>
+        <div>
+          <label class="req" for="especialidad">Especialidad</label>
+          <input id="especialidad" autocomplete="off" placeholder="🔎 Escribe o elige la especialidad">
+        </div>
+        <div>
+          <label class="req" for="numConsultorio">N° de consultorio</label>
+          <input id="numConsultorio" type="text" inputmode="numeric" placeholder="Ej. 3">
+        </div>
+        <div>
+          <label class="req" for="turno">Turno</label>
+          <select id="turno"><option value="">— elegir —</option><option>AM</option><option>PM</option></select>
+        </div>
+        <div>
+          <label for="responsable">Responsable</label>
+          <input id="responsable" autocomplete="off" placeholder="🔎 Elige centro y especialidad primero">
+          <div id="respHint" class="hint hide"></div>
+        </div>
+        <div class="hide">
+          <label for="fecha">Fecha</label>
+          <input id="fecha" type="date">
+        </div>
+        <div class="hide">
+          <label for="hora">Hora</label>
+          <input id="hora" type="time">
+        </div>
+        <div style="grid-column:1/-1"><div class="hint">🕒 La fecha y hora se registran <b>automáticamente al guardar</b> (hora local de Ecuador).</div></div>
+      </div>
+      <div id="err1" class="err hide"></div>
+      <div class="btns">
+        <button class="btn-pri" onclick="aPaso2()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div id="paso2" class="card hide">
+      <h2>Checklist — <span id="tituloEsp" class="pill"></span></h2>
+      <p class="hint">Despliega cada categoría y completa solo lo que aplique. Cada ítem muestra únicamente los campos que necesita.</p>
+      <input id="buscarItem" type="search" autocomplete="off" placeholder="🔎 Buscar ítem en esta especialidad..." style="margin-bottom:12px">
+      <div id="contenedorChecklist"></div>
+      <div class="card" style="background:var(--gris-cl);border:none">
+        <label for="obsGen">Observaciones generales (opcional)</label>
+        <textarea id="obsGen" rows="2" placeholder="Novedades del turno..."></textarea>
+      </div>
+      <div id="err2" class="err hide"></div>
+      <div class="btns">
+        <button class="btn-ghost" onclick="aPaso1()">← Atrás</button>
+        <button class="btn-pri" onclick="aPaso3()">Revisar →</button>
+      </div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div id="paso3" class="card hide">
+      <h2>Revisar y guardar</h2>
+      <div id="resumenGen"></div>
+      <h3 style="color:var(--azul-osc);font-size:15px;margin:18px 0 8px">Resumen del checklist</h3>
+      <div id="resumenChk"></div>
+      <div class="btns">
+        <button class="btn-ghost" onclick="aPaso1()">✏️ Editar datos</button>
+        <button class="btn-ghost" onclick="editarChecklist()">✏️ Editar checklist</button>
+        <button class="btn-ok" onclick="guardar()">💾 Guardar registro</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== HISTORIAL ====== -->
+<div id="vistaHist" class="hide">
+  <div class="wrap">
+    <div id="syncBar" class="banner hide"></div>
+    <div class="card">
+      <h2>Registros guardados</h2>
+      <div class="btns" style="margin-bottom:14px">
+        <button class="btn-ok" onclick="descargarPDFtodos()">⬇️ Descargar PDF</button>
+        <button class="btn-sec" onclick="exportarCSV()">⬇️ Excel (CSV)</button>
+      </div>
+      <input id="buscarHist" type="search" autocomplete="off" placeholder="🔎 Buscar por centro, especialidad, auxiliar, fecha..." style="margin-bottom:14px">
+      <div id="listaHist"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<div id="modal" class="modal" onclick="if(event.target===this)cerrarModal()">
+  <div class="box"><div id="modalBody"></div>
+    <div class="btns"><button class="btn-ghost" onclick="cerrarModal()">Cerrar</button></div>
+  </div>
+</div>
+
+<div id="printArea"></div>
+<script src="catalogos.js"></script>
+<script>
+/* ============================================================
+   App Equipamiento de Consultorios — Metrored
+   Lee los datos desde catalogos.js (window.CATALOGOS).
+   Los datos NO viven en este archivo: se administran en el Excel
+   y se regeneran a catalogos.js.
+   ============================================================ */
+
+/* --- CONFIG de envío (sin secretos en el cliente). TI lo activa luego. --- */
+const CONFIG = {
+  ENABLE_REMOTE_POST: true,    // conectado al flujo de Power Automate (guardar)
+  REMOTE_URL: "https://default480bd49c6f894faab39ec7728d95d1.30.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/e1b32978f0454764b4ce143b22943088/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OAy8kkhOoyWQX8KSSKuFceq1jzBUACZblpnkBBUM6Q8",
+  // Flujo que devuelve los catálogos en vivo desde SharePoint (si falla, usa catalogos.js)
+  CATALOGOS_URL: "https://default480bd49c6f894faab39ec7728d95d1.30.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/4e7603afaa634f939c70db7787ae34bb/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ONrgwLUoMl6UptXg3P6g_QHkeyMV8HtHfuD7ibzRGmI",
+};
+const STORAGE_KEY = "equipamiento_registros_v2";
+const DRAFT_KEY   = "equipamiento_borrador_v2";   // autoguardado del registro en curso
+const CACHE_KEY   = "equipamiento_catalogos_v2";  // caché de catálogos (apertura instantánea) — v2: invalida cachés viejos
+
+let C = window.CATALOGOS || null;   // se reemplaza por los datos en vivo de SharePoint si están disponibles
+const $ = s => document.querySelector(s);
+
+/* ---------- arranque ---------- */
+window.addEventListener("DOMContentLoaded", init);
+
+/* Trae los catálogos desde SharePoint (vía flujo) y los guarda en caché. */
+async function traerDeSharePoint(){
+  if(!CONFIG.CATALOGOS_URL) throw new Error("sin URL");
+  const r = await fetch(CONFIG.CATALOGOS_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:"{}"});
+  if(!r.ok) throw new Error("status "+r.status);
+  const norm = normalizarSP(await r.json());
+  if(!(norm && norm.productos && norm.productos.length)) throw new Error("respuesta vacía");
+  try{ localStorage.setItem(CACHE_KEY, JSON.stringify(norm)); }catch(e){}
+  norm.origen = "SharePoint (en vivo)";
+  return norm;
+}
+
+/* Carga rápida: usa caché al instante y refresca en segundo plano. Si no hay caché, baja ahora. */
+async function cargarCatalogos(){
+  let cache=null; try{ cache=JSON.parse(localStorage.getItem(CACHE_KEY)); }catch(e){}
+  if(cache && cache.productos && cache.productos.length){
+    cache.origen="caché";
+    // refresco silencioso en 2º plano (no bloquea la apertura)
+    traerDeSharePoint().then(fresco=>{ C=fresco; aplicarCatalogosVivos(); }).catch(()=>{});
+    return cache;
+  }
+  // primera vez (sin caché): baja ahora
+  try{ return await traerDeSharePoint(); }
+  catch(e){ console.warn("No se pudo leer SharePoint, uso catalogos.js:", e); if(C) C.origen="catalogos.js (respaldo)"; return C; }
+}
+
+/* Tras el refresco en 2º plano no hay que hacer nada: los desplegables propios
+   leen las opciones en vivo de C cada vez que se abren. */
+function aplicarCatalogosVivos(){ /* combos leen C en vivo */ }
+
+/* Desplegable propio con búsqueda, compatible con iPhone/Android/PC (sin <datalist>). */
+function setupCombo(inputId, getOpts){
+  const input=document.getElementById(inputId);
+  if(!input) return;
+  const wrap=document.createElement("div"); wrap.className="combo";
+  input.parentNode.insertBefore(wrap, input); wrap.appendChild(input);
+  const list=document.createElement("div"); list.className="combo-list hide"; wrap.appendChild(list);
+
+  let currentOpts=[];
+  function render(all){
+    const f = all ? "" : (input.value||"").trim().toLowerCase();   // al abrir: TODAS; al escribir: filtra
+    currentOpts=(getOpts()||[]).filter(o=>!f || String(o).toLowerCase().includes(f));
+    if(!currentOpts.length){ list.innerHTML='<div class="combo-empty">Sin resultados</div>'; return; }
+    list.innerHTML=currentOpts.slice(0,300).map((o,i)=>`<div class="combo-opt" data-i="${i}">${escHtml(o)}</div>`).join("");
+  }
+  function abrir(all){ render(all); list.classList.remove("hide"); }
+  function cerrar(){ list.classList.add("hide"); }
+  function elegir(i){
+    if(i<0 || i>=currentOpts.length) return;
+    input.value=currentOpts[i];
+    cerrar();
+    input.dispatchEvent(new Event("change",{bubbles:true}));   // autoguardado; NO "input" para no reabrir la lista
+  }
+
+  // Selección que NO estorba el scroll: solo elige si fue un TOQUE (sin arrastrar el dedo).
+  let sx=0, sy=0, moved=false, downOn=null;
+  list.addEventListener("pointerdown", e=>{
+    downOn=e.target.closest(".combo-opt");
+    sx=e.clientX; sy=e.clientY; moved=false;
+  }, {passive:true});
+  list.addEventListener("pointermove", e=>{
+    if(Math.abs(e.clientX-sx)>10 || Math.abs(e.clientY-sy)>10) moved=true;   // se está deslizando → no seleccionar
+  }, {passive:true});
+  list.addEventListener("pointerup", e=>{
+    const opt=e.target.closest(".combo-opt");
+    if(opt && opt===downOn && !moved) elegir(+opt.dataset.i);   // fue un toque, no un scroll
+    downOn=null;
+  });
+
+  // al enfocar/tocar: muestra TODAS las opciones y selecciona el texto (para reemplazar sin borrar a mano)
+  const abrirTodo=()=>{ abrir(true); try{ input.select(); }catch(e){} };
+  input.addEventListener("focus", abrirTodo);
+  input.addEventListener("click", abrirTodo);
+  input.addEventListener("input", ()=>abrir(false));   // al escribir: filtra
+  // cerrar al tocar/clicar fuera del combo (ya no se cierra por "blur", para no cortar el scroll)
+  document.addEventListener("pointerdown", e=>{ if(!wrap.contains(e.target)) cerrar(); }, {passive:true});
+}
+
+/* Convierte la respuesta de SharePoint (Title/field_1/field_2…) a la estructura que usa la app.
+   Tolera columnas de Texto y de Opción (que llegan como objeto {Value} o lista [{Value}]). */
+function valSP(v){
+  if(v==null) return "";
+  if(Array.isArray(v)) v=v[0];
+  if(v && typeof v==="object") return v.Value!=null ? v.Value : "";
+  return v;
+}
+function normalizarSP(d){
+  const si  = v => { const s=String(valSP(v)).trim().toLowerCase(); return ["sí","si","s","x","verdadero","true","1","yes"].includes(s); };
+  const txt = v => String(valSP(v));
+  return {
+    centros:        (d.centros||[]).filter(x=>si(x.field_1)).map(x=>x.Title),
+    especialidades: (d.especialidades||[]).filter(x=>si(x.field_3)).map(x=>({nombre:x.Title, tieneCocheParo:si(x.field_1), esCritica:si(x.field_2)})),
+    personas:       (d.auxiliares||d.personas||[]).filter(x=>si(x.field_2)).map(x=>({nombre:x.Title, centro:txt(x.field_1)})),
+    enfermeros:     (d.enfermeros||[]).filter(x=>si(x.field_2)).map(x=>({nombre:x.Title, centro:txt(x.field_1)})),
+    fisioterapistas:(d.fisioterapistas||[]).filter(x=>si(x.field_2)).map(x=>({nombre:x.Title, centro:txt(x.field_1)})),
+    productos:      (d.productos||[]).filter(x=>si(x.field_8)).map(x=>({especialidad:txt(x.field_1), categoria:txt(x.field_2), item:x.Title,
+                      check:si(x.field_3), cantidad:si(x.field_4), reposicion:si(x.field_5), retirar:si(x.field_6), observacion:si(x.field_7)})),
+    lenceria:       (d.lenceria||[]).filter(x=>si(x.field_7)).map(x=>({subgrupo:txt(x.field_1), item:x.Title,
+                      check:si(x.field_2), cantidad:si(x.field_3), reposicion:si(x.field_4), retirar:si(x.field_5), observacion:si(x.field_6)})),
+    cocheDiario:    (d.cocheparo||[]).filter(x=>txt(x.field_1)==="Diario").map(x=>({tipo:txt(x.field_2)||"Ítem", item:x.Title,
+                      check:si(x.field_3), cantidad:si(x.field_4), reposicion:si(x.field_5), retirar:si(x.field_6), observacion:si(x.field_7)})),
+    cocheQuincenal: (d.cocheparo||[]).filter(x=>txt(x.field_1)==="Quincenal").map(x=>({cajon:txt(x.field_2), item:x.Title,
+                      check:si(x.field_3), cantidad:si(x.field_4), reposicion:si(x.field_5), retirar:si(x.field_6), observacion:si(x.field_7)})),
+  };
+}
+
+/* ---- Regla de RESPONSABLE: grupo según especialidad + filtro por centro ---- */
+function grupoResp(esp){
+  const e=(esp||"").trim().toLowerCase();
+  if(e==="coche de paro") return {key:"enfermero",      label:"Responsable (Enfermero/a)",            plural:"enfermeros",      src:()=>C.enfermeros||[]};
+  if(e==="fisioterapia")  return {key:"fisioterapista", label:"Responsable (Fisioterapista)",         plural:"fisioterapistas", src:()=>C.fisioterapistas||[]};
+  return                         {key:"auxiliar",       label:"Responsable (Auxiliar de enfermería)", plural:"auxiliares",      src:()=>C.personas||[]};
+}
+function personalDelGrupoYCentro(){
+  const centro=($("#centro").value||"").trim();
+  const esp=($("#especialidad").value||"").trim();
+  if(!centro || !esp) return [];                 // hasta elegir centro Y especialidad, no hay a quién mostrar
+  return grupoResp(esp).src().filter(p=>p.centro===centro);
+}
+function opcionesResponsable(){ return personalDelGrupoYCentro().map(p=>p.nombre); }
+function actualizarResponsable(){
+  const esp=$("#especialidad").value;
+  const grp=grupoResp(esp);
+  const lbl=document.querySelector('label[for="responsable"]');
+  if(lbl) lbl.textContent = esp ? grp.label : "Responsable";
+  const resp=$("#responsable"); if(resp) resp.value="";           // cambió grupo/centro → se limpia
+  const hint=$("#respHint"); if(!hint) return;
+  if(!($("#centro").value||"").trim() || !esp){
+    hint.textContent="Elige primero el centro y la especialidad."; hint.classList.remove("hide");
+  }else if(opcionesResponsable().length===0){
+    hint.textContent="No hay "+grp.plural+" registrados para este centro."; hint.classList.remove("hide");
+  }else{ hint.textContent=""; hint.classList.add("hide"); }
+}
+
+async function init(){
+  // 1) intenta leer catálogos en vivo desde SharePoint (con respaldo a catalogos.js)
+  const cargado = await cargarCatalogos();
+  if(cargado) C = cargado;
+  if(!C){
+    document.body.innerHTML = '<div class="wrap"><div class="card"><h2>No se cargaron los datos</h2>'+
+      '<p>No se pudo leer SharePoint y falta <b>catalogos.js</b> junto a la app.</p></div></div>';
+    return;
+  }
+  // campos con búsqueda — desplegable propio (compatible iPhone/Android/PC)
+  setupCombo("centro",       ()=>C.centros);
+  setupCombo("especialidad", ()=>C.especialidades.map(e=>e.nombre));
+  setupCombo("responsable",  ()=>opcionesResponsable());
+  // el Responsable depende del centro + especialidad: se refresca cuando cambian
+  $("#centro").addEventListener("change", actualizarResponsable);
+  $("#especialidad").addEventListener("change", actualizarResponsable);
+  actualizarResponsable();
+  // fecha/hora ahora (hora LOCAL, no UTC)
+  const n = new Date();
+  const p = x => String(x).padStart(2,"0");
+  $("#fecha").value = `${n.getFullYear()}-${p(n.getMonth()+1)}-${p(n.getDate())}`;
+  $("#hora").value  = `${p(n.getHours())}:${p(n.getMinutes())}`;
+  refrescarHist();
+  // autoguardado: cualquier cambio en los datos generales o el checklist
+  ["#centro","#especialidad","#numConsultorio","#turno","#responsable","#fecha","#hora","#obsGen"]
+    .forEach(s=>{ $(s).addEventListener("change",saveDraftSoon); $(s).addEventListener("input",saveDraftSoon); });
+  $("#contenedorChecklist").addEventListener("input",saveDraftSoon);
+  $("#contenedorChecklist").addEventListener("change",saveDraftSoon);
+  // búsquedas
+  $("#buscarItem").addEventListener("input", e=>filtrarChecklist(e.target.value));
+  $("#buscarHist").addEventListener("input", e=>{ histQuery=e.target.value; refrescarHist(); });
+  window.addEventListener("online", sincronizar);   // al recuperar wifi, reintenta
+  ofrecerBorrador();
+  sincronizar();                                     // envía pendientes al abrir
+}
+
+function llenarDatalist(id, arr){
+  document.getElementById(id).innerHTML = arr.map(v=>`<option value="${escAttr(v)}"></option>`).join("");
+}
+
+/* ---------- filtrar checklist por texto ---------- */
+function filtrarChecklist(q){
+  q=(q||"").trim().toLowerCase();
+  document.querySelectorAll("#contenedorChecklist .acc").forEach(acc=>{
+    let visibles=0;
+    acc.querySelectorAll(".item").forEach(it=>{
+      const match = !q || (it.dataset.item||"").toLowerCase().includes(q);
+      it.style.display = match ? "" : "none";
+      if(match) visibles++;
+    });
+    acc.querySelectorAll(".sub-h").forEach(s=>{ s.style.display = q ? "none" : ""; });
+    if(q){
+      acc.style.display = visibles ? "" : "none";
+      acc.classList.toggle("open", visibles>0);
+    }else{
+      acc.style.display = "";
+      acc.classList.remove("open");
+    }
+  });
+}
+
+function llenarSelect(sel, arr, ph){
+  const el = $(sel);
+  el.innerHTML = '<option value="">'+ph+'</option>' +
+    arr.map(v=>`<option value="${escAttr(v)}">${escHtml(v)}</option>`).join("");
+}
+
+/* ---------- navegación de tabs ---------- */
+function irTab(t){
+  const nuevo = t==="nuevo";
+  $("#vistaNuevo").classList.toggle("hide", !nuevo);
+  $("#vistaHist").classList.toggle("hide", nuevo);
+  $("#tabNuevo").classList.toggle("act", nuevo);
+  $("#tabHist").classList.toggle("act", !nuevo);
+  if(!nuevo){ refrescarHist(); sincronizar(); }
+}
+
+/* ---------- pasos ---------- */
+let stepActual = 1;
+let checklistEsp = null;   // especialidad para la que se construyó el checklist (no reconstruir y perder datos al editar)
+function setStep(n){
+  stepActual = n;
+  [1,2,3].forEach(i=>{
+    $("#paso"+i).classList.toggle("hide", i!==n);
+    const st=$("#stp"+i);
+    st.classList.toggle("act", i===n);
+    st.classList.toggle("done", i<n);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function aPaso1(){ setStep(1); }
+function editarChecklist(){ setStep(2); }   // volver al checklist SIN reconstruirlo (conserva lo capturado)
+
+function aPaso2(){
+  const e1=$("#err1"); e1.classList.add("hide");
+  const faltan=[];
+  if(!$("#centro").value) faltan.push("Centro");
+  if(!$("#especialidad").value) faltan.push("Especialidad");
+  if(!$("#numConsultorio").value.trim()) faltan.push("N° de consultorio");
+  if(!$("#turno").value) faltan.push("Turno");
+  if(!$("#fecha").value) faltan.push("Fecha");
+  if(!$("#hora").value) faltan.push("Hora");
+  if(faltan.length){ e1.textContent="Completa: "+faltan.join(", "); e1.classList.remove("hide"); return; }
+  // validar que lo escrito sea una opción real (los campos con búsqueda permiten texto libre)
+  const malos=[];
+  if($("#centro").value && !C.centros.includes($("#centro").value)) malos.push("Centro");
+  if($("#especialidad").value && !C.especialidades.some(e=>e.nombre===$("#especialidad").value)) malos.push("Especialidad");
+  if($("#responsable").value && !opcionesResponsable().includes($("#responsable").value)) malos.push("Responsable");
+  if(malos.length){ e1.textContent="Elige una opción válida de la lista en: "+malos.join(", "); e1.classList.remove("hide"); return; }
+  const esp=$("#especialidad").value;
+  // reconstruir SOLO si cambió la especialidad (así, al editar y volver, no se pierde lo capturado)
+  if(checklistEsp!==esp || !$("#contenedorChecklist").children.length){ construirChecklist(esp); checklistEsp=esp; }
+  $("#tituloEsp").textContent=esp;
+  setStep(2);
+}
+
+function aPaso3(){
+  const datos=recolectar();
+  if(!datos) return;
+  pintarResumen(datos);
+  setStep(3);
+}
+
+/* ---------- construir checklist dinámico ---------- */
+function grupoCategorias(especialidad){
+  // productos de la especialidad agrupados por categoría, en orden fijo
+  const orden=["Desinfección","Verificación de funcionamiento","Revisión","Reposición insumos/dispositivos"];
+  const prods=C.productos.filter(p=>p.especialidad===especialidad);
+  const grupos={};
+  prods.forEach(p=>{ (grupos[p.categoria]=grupos[p.categoria]||[]).push(p); });
+  const cats=Object.keys(grupos).sort((a,b)=>{
+    const ia=orden.indexOf(a), ib=orden.indexOf(b);
+    return (ia<0?99:ia)-(ib<0?99:ib);
+  });
+  return {cats,grupos};
+}
+
+function construirChecklist(especialidad){
+  const cont=$("#contenedorChecklist");
+  cont.innerHTML="";
+  const bi=$("#buscarItem"); if(bi) bi.value="";   // reiniciar búsqueda
+  let idx=0;
+  const esp=C.especialidades.find(e=>e.nombre===especialidad)||{};
+
+  if(esp.tieneCocheParo){
+    // ===== ESPECIALIDAD "COCHE DE PARO" (aparte): solo el coche (diario + quincenal) =====
+    if(C.cocheDiario.length){
+      const filas=[];
+      C.cocheDiario.forEach(p=>{
+        if(p.tipo==="Subtítulo"){ filas.push(subHeader(p.item)); }
+        else filas.push(itemRow({...p,categoria:"Coche de paro (diario)"}, "CD"+(idx++)));
+      });
+      cont.appendChild(acordeon("🚑 Coche de paro — Diario", C.cocheDiario.filter(x=>x.tipo!=="Subtítulo").length, filas, "cat:CocheDiario"));
+    }
+    if(C.cocheQuincenal.length){
+      const filas=[]; let caj=null;
+      C.cocheQuincenal.forEach(p=>{
+        if(p.cajon && p.cajon!==caj){ caj=p.cajon; filas.push(subHeader(caj)); }
+        filas.push(itemRow({...p,categoria:"Coche de paro (quincenal)"}, "CQ"+(idx++)));
+      });
+      cont.appendChild(acordeon("🧰 Coche de paro — Quincenal", C.cocheQuincenal.length, filas, "cat:CocheQuincenal"));
+    }
+  } else {
+    // ===== ESPECIALIDAD NORMAL: productos por categoría + cambio de lencería =====
+    const {cats,grupos}=grupoCategorias(especialidad);
+    cats.forEach(cat=>{
+      const items=grupos[cat];
+      cont.appendChild(acordeon(catIcon(cat)+" "+cat, items.length, items.map(p=>itemRow(p, "P"+(idx++))), "cat:"+cat));
+    });
+    if(C.lenceria.length){
+      const filas=[]; let sub=null;
+      C.lenceria.forEach(p=>{
+        if(p.subgrupo && p.subgrupo!==sub){ sub=p.subgrupo; filas.push(subHeader(sub)); }
+        filas.push(itemRow({...p,categoria:"Cambio de lencería"}, "L"+(idx++)));
+      });
+      cont.appendChild(acordeon("🧺 Cambio de lencería", C.lenceria.length, filas, "cat:Lenceria"));
+    }
+  }
+
+  if(!cont.children.length){
+    cont.innerHTML='<div class="empty">No hay ítems para esta especialidad. Agrega productos en el Excel.</div>';
+  }
+}
+
+function catIcon(c){
+  if(c.startsWith("Desinf")) return "🧼";
+  if(c.startsWith("Verif")) return "🔧";
+  if(c.startsWith("Revis")) return "♻️";
+  if(c.startsWith("Repos")) return "📦";
+  return "📋";
+}
+
+function acordeon(titulo, count, filasNodes, key){
+  const wrap=document.createElement("div"); wrap.className="acc";
+  const h=document.createElement("div"); h.className="acc-h";
+  h.innerHTML=`<span class="ti">${titulo}</span>
+     <span style="display:flex;gap:8px;align-items:center">
+       <span class="badge">${count} ítems</span>
+       <span class="chev">▾</span></span>`;
+  h.onclick=()=>wrap.classList.toggle("open");
+  const b=document.createElement("div"); b.className="acc-b";
+  filasNodes.forEach(n=>b.appendChild(n));
+  wrap.appendChild(h); wrap.appendChild(b);
+  return wrap;
+}
+
+function subHeader(txt){
+  const d=document.createElement("div"); d.className="sub-h"; d.textContent=txt; return d;
+}
+
+function itemRow(p, id){
+  const row=document.createElement("div"); row.className="item";
+  row.dataset.id=id;
+  row.dataset.item=p.item; row.dataset.categoria=p.categoria||"";
+  row.dataset.subgrupo=p.subgrupo||p.cajon||"";
+  const nm=document.createElement("div"); nm.className="nm"; nm.textContent=p.item; row.appendChild(nm);
+  const ctrls=document.createElement("div"); ctrls.className="controls";
+  const hasCheck = !!p.check;
+
+  if(hasCheck){
+    const c=document.createElement("div"); c.className="ctl";
+    c.innerHTML=`<small>Cumple</small>
+      <div class="toggle" data-role="cumple" data-val="">
+        <button type="button" class="si" onclick="setCumple(this,true)">✓ Sí</button>
+        <button type="button" class="no" onclick="setCumple(this,false)">✗ No</button>
+      </div>`;
+    ctrls.appendChild(c);
+  }
+
+  // Campos numéricos: cantidad / reposición / retirar
+  function numCtl(role,label){
+    const c=document.createElement("div"); c.className="ctl num";
+    c.innerHTML=`<small>${label}</small><input type="number" min="0" step="1" data-role="${role}" placeholder="0">`;
+    return c;
+  }
+  const nums=[];
+  if(p.cantidad)   nums.push(numCtl("cantidad","Cantidad (hay)"));
+  if(p.reposicion) nums.push(numCtl("reposicion","Reposición (pone)"));
+  if(p.retirar)    nums.push(numCtl("retirar","Retirar (saca)"));
+
+  if(hasCheck && nums.length){
+    // En ítems con check, los numéricos aparecen SOLO al marcar "No"
+    const cond=document.createElement("div"); cond.className="cond"; cond.style.display="none";
+    nums.forEach(n=>cond.appendChild(n));
+    ctrls.appendChild(cond);
+  }else{
+    // Ítems sin check (insumos): siempre visibles
+    nums.forEach(n=>ctrls.appendChild(n));
+  }
+
+  if(p.observacion){
+    const c=document.createElement("div"); c.className="ctl obs";
+    c.innerHTML=`<small>Observación</small><input type="text" data-role="observacion" placeholder="—">`;
+    ctrls.appendChild(c);   // siempre visible (opción A)
+  }
+  row.appendChild(ctrls);
+  return row;
+}
+
+function setCumple(btn,val){
+  const tog=btn.parentElement;
+  setCumpleVal(tog,val);
+  const cond=tog.closest(".item").querySelector(".cond");
+  if(cond){
+    cond.style.display = (val===false) ? "flex" : "none";
+    if(val===true) cond.querySelectorAll("input").forEach(i=>i.value="");  // al marcar Sí, limpia los numéricos
+  }
+  saveDraftSoon();
+}
+function setCumpleVal(tog,val){
+  tog.dataset.val=String(val);
+  tog.querySelector(".si").classList.toggle("on",val===true);
+  tog.querySelector(".no").classList.toggle("on",val===false);
+}
+
+/* ---------- recolectar (con validación) ---------- */
+function recolectar(){
+  const e2=$("#err2"); e2.classList.add("hide");
+  const detalle=[]; const errores=[];
+  document.querySelectorAll("#contenedorChecklist .item").forEach(row=>{
+    const tog=row.querySelector('[data-role="cumple"]');
+    const cumpleRaw= tog ? tog.dataset.val : "";
+    const cumple = cumpleRaw==="" ? null : (cumpleRaw==="true");
+    const cant = val(row,'[data-role="cantidad"]');
+    const repo = val(row,'[data-role="reposicion"]');
+    const reti = val(row,'[data-role="retirar"]');
+    const obs  = (row.querySelector('[data-role="observacion"]')||{}).value || "";
+
+    // ¿el ítem fue tocado?
+    const tocado = cumple!==null || cant!=="" || repo!=="" || reti!=="" || obs.trim()!=="";
+    if(tocado){
+      detalle.push({
+        categoria: row.dataset.categoria,
+        subgrupo: row.dataset.subgrupo,
+        item: row.dataset.item,
+        cumple,
+        cantidad: cant===""?null:Number(cant),
+        reposicion: repo===""?null:Number(repo),
+        retirar: reti===""?null:Number(reti),
+        observacion: obs.trim()
+      });
+    }
+  });
+  if(errores.length){
+    e2.innerHTML="Revisa:<br>• "+errores.slice(0,8).join("<br>• ")+(errores.length>8?"<br>…":"");
+    e2.classList.remove("hide");
+    window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+    return null;
+  }
+  const n=new Date();
+  // Fecha/hora = hora LOCAL de Ecuador, tomada al momento de GUARDAR (no al abrir). Es "la hora correcta".
+  // creadoISO = marca técnica independiente (UTC ISO) para verificación/auditoría; puede NO coincidir con hora.
+  const P=x=>String(x).padStart(2,"0");
+  const fechaLocal=`${n.getFullYear()}-${P(n.getMonth()+1)}-${P(n.getDate())}`;
+  const horaLocal=`${P(n.getHours())}:${P(n.getMinutes())}`;
+  return {
+    id: "REG-"+n.getTime(),
+    creadoISO: n.toISOString(),
+    fecha: fechaLocal,
+    hora: horaLocal,
+    turno: $("#turno").value,
+    centro: $("#centro").value,
+    especialidad: $("#especialidad").value,
+    numeroConsultorio: $("#numConsultorio").value.trim(),
+    auxiliar:       grupoResp($("#especialidad").value).key==="auxiliar"       ? $("#responsable").value : "",
+    enfermero:      grupoResp($("#especialidad").value).key==="enfermero"      ? $("#responsable").value : "",
+    fisioterapista: grupoResp($("#especialidad").value).key==="fisioterapista" ? $("#responsable").value : "",
+    observacionesGenerales: $("#obsGen").value.trim(),
+    detalle
+  };
+}
+function val(row,sel){ const el=row.querySelector(sel); return el? el.value.trim():""; }
+
+/* ---------- resumen ---------- */
+/* ---- Ficha profesional (compartida por Revisar y Ver registro) ---- */
+function fichaGeneral(d){
+  const resp = d.fisioterapista||d.enfermero||d.auxiliar||"—";
+  const fld=(ic,lbl,val)=>`<div class="fld"><small>${ic} ${lbl}</small><b>${escHtml(String(val||"—"))}</b></div>`;
+  return `<div class="ficha-head">
+      <div class="ft-title">${escHtml(d.centro||"—")}</div>
+      <div class="ft-sub">${escHtml(d.especialidad||"")}</div>
+    </div>
+    <div class="ficha-grid">
+      ${fld("🚪","N° Consultorio",d.numeroConsultorio)}
+      ${fld("🕐","Turno",d.turno)}
+      ${fld("📅","Fecha",d.fecha)}
+      ${fld("⏰","Hora",d.hora)}
+      ${fld("👤","Responsable",resp)}
+    </div>
+    ${d.observacionesGenerales?`<div class="obs-note"><small>📝 Observaciones generales</small>${escHtml(d.observacionesGenerales)}</div>`:""}`;
+}
+function fichaDetalle(d){
+  if(!d.detalle || !d.detalle.length) return '<div class="empty">No se marcó ningún ítem.</div>';
+  const porCat={};
+  d.detalle.forEach(x=>{ (porCat[x.categoria]=porCat[x.categoria]||[]).push(x); });
+  return Object.keys(porCat).map(cat=>{
+    const items=porCat[cat].map(x=>{
+      const b=[];
+      if(x.cumple!==null) b.push(x.cumple?'<span class="badge b-si">✓ Cumple</span>':'<span class="badge b-no">✗ No cumple</span>');
+      if(x.cantidad!=null) b.push('<span class="badge b-cant">🔢 Hay '+x.cantidad+'</span>');
+      if(x.reposicion!=null) b.push('<span class="badge b-repo">♻️ Repone '+x.reposicion+'</span>');
+      if(x.retirar!=null) b.push('<span class="badge b-reti">🗑️ Retira '+x.retirar+'</span>');
+      return `<div class="det-item">
+          <div class="di-nm">${escHtml(x.item)}</div>
+          <div class="di-badges">${b.join("")||'<span class="badge b-neutral">Sin datos</span>'}</div>
+          ${x.observacion?`<div class="det-obs">📝 ${escHtml(x.observacion)}</div>`:""}
+        </div>`;
+    }).join("");
+    const ic = (typeof catIcon==="function")?catIcon(cat)+" ":"";
+    return `<div class="cat-sec">
+        <div class="cat-h">${ic}${escHtml(cat)}<span class="cat-count">${porCat[cat].length}</span></div>
+        ${items}
+      </div>`;
+  }).join("");
+}
+function pintarResumen(d){
+  $("#resumenGen").innerHTML=fichaGeneral(d);
+  $("#resumenChk").innerHTML=fichaDetalle(d);
+}
+function kv(k,v){ return `<div class="kv"><span>${k}</span><b>${escHtml(String(v))}</b></div>`; }
+
+/* ---------- guardar ---------- */
+function guardar(){
+  const d=recolectar();
+  if(!d) return;
+  d.enviado=false; d.intentos=0;        // entra a la cola de envío
+  const arr=leer();
+  arr.unshift(d);
+  guardarArr(arr);
+  clearDraft();                 // ya se guardó: el borrador deja de tener sentido
+  toast("✅ Registro guardado");
+  resetForm();
+  refrescarHist();
+  irTab("hist");
+  sincronizar();                // intenta enviarlo (y a los pendientes) a SharePoint
+}
+
+/* ---------- AUTOGUARDADO DEL BORRADOR (sobrevive a recargar/cerrar) ---------- */
+let draftT;
+function saveDraftSoon(){ clearTimeout(draftT); draftT=setTimeout(saveDraft,400); }
+function keyOf(row){ return [row.dataset.categoria,row.dataset.subgrupo,row.dataset.item].join("||"); }
+function rawVal(row,sel){ const el=row.querySelector(sel); return el?el.value:""; }
+
+function captureForm(){
+  const items={};
+  document.querySelectorAll("#contenedorChecklist .item").forEach(row=>{
+    const tog=row.querySelector('[data-role="cumple"]');
+    items[keyOf(row)]={
+      cumple: tog?tog.dataset.val:"",
+      cantidad: rawVal(row,'[data-role="cantidad"]'),
+      reposicion: rawVal(row,'[data-role="reposicion"]'),
+      retirar: rawVal(row,'[data-role="retirar"]'),
+      observacion: rawVal(row,'[data-role="observacion"]')
+    };
+  });
+  return {
+    step: stepActual,
+    actualizado: new Date().toISOString(),
+    general:{
+      centro:$("#centro").value, especialidad:$("#especialidad").value,
+      numConsultorio:$("#numConsultorio").value, turno:$("#turno").value,
+      responsable:$("#responsable").value,
+      fecha:$("#fecha").value, hora:$("#hora").value, obsGen:$("#obsGen").value
+    },
+    items
+  };
+}
+function saveDraft(){ try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(captureForm())); }catch(e){} }
+function loadDraft(){ try{ return JSON.parse(localStorage.getItem(DRAFT_KEY)); }catch(e){ return null; } }
+function clearDraft(){ localStorage.removeItem(DRAFT_KEY); }
+
+function ofrecerBorrador(){
+  const d=loadDraft(); if(!d) return;
+  const g=d.general||{};
+  const algoEscrito = g.especialidad || g.centro || g.numConsultorio ||
+    Object.values(d.items||{}).some(v=>v.cumple!==""||v.cantidad||v.reposicion||v.observacion);
+  if(!algoEscrito){ clearDraft(); return; }
+  const b=$("#draftBanner");
+  b.querySelector(".info").textContent=
+    `Tienes un registro sin terminar: ${g.centro||"?"} — ${g.especialidad||"?"} · Cons. ${g.numConsultorio||"?"} (${g.fecha||""} ${g.hora||""}). ¿Lo continúas?`;
+  b._draft=d; b.classList.remove("hide");
+}
+function continuarDraft(){
+  const d=$("#draftBanner")._draft; $("#draftBanner").classList.add("hide");
+  if(d) aplicarBorrador(d);
+}
+function descartarDraft(){ clearDraft(); $("#draftBanner").classList.add("hide"); toast("Borrador descartado"); }
+
+function aplicarBorrador(d){
+  const g=d.general||{};
+  $("#centro").value=g.centro||""; $("#especialidad").value=g.especialidad||"";
+  $("#numConsultorio").value=g.numConsultorio||""; $("#turno").value=g.turno||"";
+  actualizarResponsable();
+  $("#responsable").value = g.responsable || g.auxiliar || g.enfermero || g.fisioterapista || "";
+  if(g.fecha)$("#fecha").value=g.fecha; if(g.hora)$("#hora").value=g.hora;
+  $("#obsGen").value=g.obsGen||"";
+  if(g.especialidad && (d.step>=2)){
+    construirChecklist(g.especialidad); checklistEsp=g.especialidad;
+    $("#tituloEsp").textContent=g.especialidad;
+    document.querySelectorAll("#contenedorChecklist .item").forEach(row=>{
+      const v=(d.items||{})[keyOf(row)]; if(!v) return;
+      const tog=row.querySelector('[data-role="cumple"]');
+      if(tog && v.cumple!=="" && v.cumple!=null){
+        const esNo = (v.cumple==="false"||v.cumple===false);
+        setCumpleVal(tog, !esNo);
+        const cond=row.querySelector(".cond"); if(cond) cond.style.display = esNo ? "flex" : "none";
+      }
+      setIfAny(row,'[data-role="cantidad"]',v.cantidad);
+      setIfAny(row,'[data-role="reposicion"]',v.reposicion);
+      setIfAny(row,'[data-role="retirar"]',v.retirar);
+      setIfAny(row,'[data-role="observacion"]',v.observacion);
+    });
+  }
+  const step=d.step||1;
+  if(step===3){ const dd=recolectar(); if(dd){ pintarResumen(dd); setStep(3); } else setStep(2); }
+  else setStep(step);
+  toast("↩️ Registro restaurado");
+}
+function setIfAny(row,sel,v){ const el=row.querySelector(sel); if(el && v!=null && v!=="") el.value=v; }
+
+/* ---------- COLA DE ENVÍO (outbox) con reintentos ---------- */
+let sincronizando=false;
+function guardarArr(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+// Prepara el JSON que se envía: quita metadatos internos y convierte cumple (bool) -> "Sí"/"No"/"" (texto)
+function toPayload(d){
+  const {enviado,intentos,...rest}=d;
+  return {...rest, detalle:(rest.detalle||[]).map(x=>({
+    ...x,
+    cumple: x.cumple===true ? "Sí" : (x.cumple===false ? "No" : "")
+  }))};
+}
+function marcarEnviado(id, ok){
+  const arr=leer(); const it=arr.find(x=>x.id===id);
+  if(it){ if(ok) it.enviado=true; else it.intentos=(it.intentos||0)+1; guardarArr(arr); }
+}
+async function sincronizar(){
+  actualizarBarraSync();
+  if(sincronizando) return;
+  if(!CONFIG.ENABLE_REMOTE_POST || !CONFIG.REMOTE_URL) return;   // aún sin endpoint: quedan en cola
+  const pend=leer().filter(d=>!d.enviado);
+  if(!pend.length) return;
+  sincronizando=true; actualizarBarraSync();
+  for(const d of pend){
+    let ok=false;
+    try{
+      const r=await fetch(CONFIG.REMOTE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(toPayload(d))});
+      ok=r.ok;
+    }catch(e){ ok=false; }
+    marcarEnviado(d.id, ok);
+  }
+  sincronizando=false;
+  refrescarHist(); actualizarBarraSync();
+}
+function actualizarBarraSync(){
+  const bar=$("#syncBar"); if(!bar) return;
+  const pend=leer().filter(d=>!d.enviado).length;
+  if(!CONFIG.ENABLE_REMOTE_POST || !CONFIG.REMOTE_URL){
+    if(pend){ bar.classList.remove("hide");
+      bar.innerHTML='⚙️ Envío a SharePoint aún no configurado. Los '+pend+' registro(s) quedan guardados y se enviarán automáticamente al conectar.'; }
+    else bar.classList.add("hide");
+    return;
+  }
+  if(pend>0){ bar.classList.remove("hide");
+    bar.innerHTML='⏳ '+pend+' registro(s) pendientes de enviar.'+(sincronizando?' Enviando…':' <button class="btn-pri" style="flex:none" onclick="sincronizar()">Reintentar</button>'); }
+  else bar.classList.add("hide");
+}
+
+function resetForm(){
+  ["#numConsultorio","#obsGen"].forEach(s=>$(s).value="");
+  $("#turno").value=""; $("#especialidad").value="";
+  $("#contenedorChecklist").innerHTML=""; checklistEsp=null;
+  setStep(1);
+}
+
+/* ---------- historial ---------- */
+function leer(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY))||[]; }catch(e){ return []; } }
+
+let histQuery="";
+function refrescarHist(){
+  const todos=leer();
+  $("#histCount").textContent=todos.length;
+  const q=histQuery.trim().toLowerCase();
+  const arr=histFiltrados();
+  const cont=$("#listaHist");
+  if(!arr.length){ cont.innerHTML='<div class="empty">'+(q?'Sin resultados para “'+escHtml(histQuery)+'”.':'Aún no hay registros guardados.')+'</div>'; return; }
+  cont.innerHTML=arr.map(d=>`
+    <div class="hist-row">
+      <div class="meta">
+        <b>${escHtml(d.centro)} — ${escHtml(d.especialidad)}</b> · Cons. ${escHtml(d.numeroConsultorio||"?")}
+        <small>${escHtml(d.fecha)} ${escHtml(d.hora)} · ${escHtml(d.turno)} · ${escHtml(d.fisioterapista||d.enfermero||d.auxiliar||"")} · ${d.detalle.length} ítems · ${d.enviado?'<span style="color:var(--verde)">✅ enviado</span>':'<span style="color:var(--amber)">⏳ pendiente</span>'}</small>
+      </div>
+      <div class="ops">
+        <button class="btn-sec" onclick="verRegistro('${d.id}')">Ver</button>
+        <button class="btn-sec" onclick="descargarPDFuno('${d.id}')">⬇️ PDF</button>
+        <button class="btn-danger" onclick="eliminarRegistro('${d.id}')">Quitar de este dispositivo</button>
+      </div>
+    </div>`).join("");
+}
+
+function verRegistro(id){               // <-- BUG corregido: botón Ver funcional
+  const d=leer().find(x=>x.id===id); if(!d) return;
+  const estado = d.enviado?'<span class="badge b-si">✅ Enviado</span>':'<span class="badge b-repo">⏳ Pendiente</span>';
+  $("#modalBody").innerHTML = fichaGeneral(d) +
+    `<h3 class="modal-h3">📋 Detalle del checklist (${d.detalle.length}) ${estado}</h3>` +
+    fichaDetalle(d);
+  $("#modal").classList.add("show");
+}
+function eliminarRegistro(id){          // Solo quita del historial LOCAL de este dispositivo; NO borra de SharePoint
+  if(!confirm("¿Quitar este registro de este dispositivo?\n\nSolo desaparece de la lista de esta tablet/celular. El registro SIGUE guardado en el sistema central (SharePoint) y no se borra.")) return;
+  const arr=leer().filter(x=>x.id!==id);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(arr));
+  refrescarHist(); toast("Quitado de este dispositivo");
+}
+function cerrarModal(){ $("#modal").classList.remove("show"); }
+
+/* ---------- exportar (CSV completo: incluye consultorio, enfermero, obs) ---------- */
+function exportarCSV(){
+  const arr=leer(); if(!arr.length){ toast("No hay datos"); return; }
+  const cols=["id","fecha","hora","turno","centro","especialidad","numeroConsultorio",
+              "auxiliar","enfermero","fisioterapista","observacionesGenerales",
+              "categoria","subgrupo","item","cumple","cantidad","reposicion","retirar","observacion"];
+  const filas=[cols.join(",")];
+  arr.forEach(d=>{
+    if(!d.detalle.length){ filas.push(cols.map(c=>csv(cab(d,c,{}))).join(",")); return; }
+    d.detalle.forEach(x=>{ filas.push(cols.map(c=>csv(cab(d,c,x))).join(",")); });
+  });
+  descargar("registros-equipamiento.csv","﻿"+filas.join("\r\n"),"text/csv");
+}
+function cab(d,c,x){
+  if(["categoria","subgrupo","item","observacion"].includes(c)) return x[c]??"";
+  if(c==="cumple") return x.cumple===null||x.cumple===undefined?"":(x.cumple?"Sí":"No");
+  if(c==="cantidad") return x.cantidad??"";
+  if(c==="reposicion") return x.reposicion??"";
+  if(c==="retirar") return x.retirar??"";
+  return d[c]??"";
+}
+function csv(v){ v=String(v); return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }
+function exportarJSON(){
+  const arr=leer(); if(!arr.length){ toast("No hay datos"); return; }
+  descargar("registros-equipamiento.json", JSON.stringify(arr,null,2),"application/json");
+}
+function descargar(nombre,contenido,tipo){
+  const blob=new Blob([contenido],{type:tipo+";charset=utf-8"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=nombre;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href);
+}
+
+/* ---------- filtro del historial (compartido por lista y PDF) ---------- */
+function histFiltrados(){
+  const q=histQuery.trim().toLowerCase(); const todos=leer();
+  return q ? todos.filter(d=>[d.centro,d.especialidad,d.auxiliar,d.enfermero,d.fisioterapista,d.fecha,d.numeroConsultorio,d.turno].join(" ").toLowerCase().includes(q)) : todos;
+}
+/* ---------- Descargar PDF (vía impresión → "Guardar como PDF"; sin librerías, sirve en iPhone) ---------- */
+function fichaPrintRegistro(d){
+  const estado = d.enviado?"Enviado":"Pendiente";
+  return `<div class="print-reg">
+    <div class="print-hd">🏥 Registro de Equipamiento de Consultorios — Metrored</div>
+    ${fichaGeneral(d)}
+    <h3 class="modal-h3">Detalle del checklist (${d.detalle.length}) · ${estado}</h3>
+    ${fichaDetalle(d)}
+  </div>`;
+}
+function imprimirPDF(regs, titulo){
+  if(!regs || !regs.length){ toast("No hay registros para descargar"); return; }
+  $("#printArea").innerHTML = regs.map(fichaPrintRegistro).join("");
+  const antes=document.title; document.title = titulo || "Registro-Equipamiento";
+  window.addEventListener("afterprint", ()=>{ document.title=antes; }, {once:true});
+  window.print();
+}
+function descargarPDFuno(id){ const d=leer().find(x=>x.id===id); if(d) imprimirPDF([d], "Registro-"+(d.centro||"")+"-"+(d.fecha||"")); }
+function descargarPDFtodos(){
+  const arr=histFiltrados();
+  if(!arr.length){ toast("No hay registros para descargar"); return; }
+  imprimirPDF(arr, histQuery.trim()?"Registros-filtrados":"Registros-Equipamiento");
+}
+
+/* ---------- utilidades ---------- */
+let toastT;
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2200); }
+function escHtml(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function escAttr(s){ return escHtml(s); }
+</script>
+</body>
+</html>
