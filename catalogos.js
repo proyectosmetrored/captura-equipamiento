@@ -1,6 +1,6 @@
-// Datos generados desde Datos-Equipamiento.xlsx — NO editar a mano (editar el Excel y regenerar)
+/* Respaldo de catálogos — generado desde SharePoint. NO editar a mano. */
 window.CATALOGOS = {
- "generado": "2026-06-21",
+ "generado": "2026-09-02 14:25 (desde SharePoint en vivo)",
  "centros": [
   "CM AMAZONAS",
   "CM CALDERÓN",
@@ -17,7 +17,7 @@ window.CATALOGOS = {
  "especialidades": [
   {
    "nombre": "Consultorio general, varias",
-   "tieneCocheParo": true,
+   "tieneCocheParo": false,
    "esCritica": false
   },
   {
@@ -37,12 +37,12 @@ window.CATALOGOS = {
   },
   {
    "nombre": "Endoscopía",
-   "tieneCocheParo": true,
+   "tieneCocheParo": false,
    "esCritica": false
   },
   {
    "nombre": "Cardiología",
-   "tieneCocheParo": true,
+   "tieneCocheParo": false,
    "esCritica": false
   },
   {
@@ -69,53 +69,430 @@ window.CATALOGOS = {
    "nombre": "Fisioterapia",
    "tieneCocheParo": false,
    "esCritica": false
+  },
+  {
+   "nombre": "Coche de paro",
+   "tieneCocheParo": true,
+   "esCritica": false
   }
  ],
  "personas": [
-  "María Fernanda Mosquera",
-  "Viviana Catucuamba",
-  "Jhonny Valladares",
-  "Kevin Astudillo",
-  "Flor Suárez",
-  "Daniela Ramos",
-  "María Fernanda Sánchez",
-  "Jhon Yugcha",
-  "Karina Condo",
-  "Alisson Loor",
-  "Ana Cevallos",
-  "Leonor Lavayen",
-  "David Morán",
-  "Jonathan Gomez",
-  "Roberta hidrobo",
-  "Andrés Terranova",
-  "Shirley Cruz",
-  "Lina Reina",
-  "Dennis Maigua",
-  "Alejandra Guilcapi",
-  "Tania Mendoza",
-  "Fisioterapia"
+  {
+   "nombre": "Viviana Catucuamba",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Valeria García",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Cristóbal Nasimba",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Flor Suárez",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "Lina Reina",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "María Fernanda Sánchez",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Jhon Yugcha",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Karina Condo",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Alisson Loor",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Ana Cevallos",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Leonor Lavayen",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "David Morán",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "Jonathan Gomez",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "Roberta Hidrobo",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Alejandra Guilcapi",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Jonny Valladares",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Karina Mantilla",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Ramos Silva Evelyn Daniela",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "Tania Alejandra Mendoza Arevalo",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "Vicente Felipe Caiza",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "Alisson Solange Ramirez Gallo",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "Cristian Barragán",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "María José Manrique",
+   "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "Allison Solorzano",
+   "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "Jazmín Isabel Cuzco Cabrera",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "OROZCO GÉNESIS PAOLA",
+   "centro": "CM CIUDAD CELESTE"
+  }
  ],
  "enfermeros": [
-  "Lic. Jhoanna Ostaiza",
-  "Lic. Lisbeth Morales",
-  "Lcda Aurora Vaca",
-  "Lcda. Joselyn Vélez",
-  "Lic Mariana Siguencia",
-  "Lic Vanesa Arias",
-  "Lic. Josabeth Orrala horario",
-  "Lic. Jazmín Andrade horario",
-  "Lic Angela Cortez",
-  "Lic. Michelle Merino",
-  "Lic. Lisseth Herrera",
-  "Lic. Wendy Caiza",
-  "Lic. Jenny Concha",
-  "Lic. Adriana Montes",
-  "Lic. Daysi Cueva",
-  "Lic. Irma Guerrero",
-  "Lic. Melania Morales",
-  "Lic. Shirley Chicaiza",
-  "Lic. Gabriel Fienco",
-  "Lic. Lourdes Rodríguez"
+  {
+   "nombre": "Lisbeth Morales",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Jhoanna Ostaiza",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Natacha Espinosa",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Aurora Vaca",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Joselyn Vélez",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Mariana Siguencia",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "Vanesa Arias",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "Josabeth Orrala",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Jazmín Andrade",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Elba Gómez",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Angela Cortez",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "Lisseth Herrera",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Wendy Caiza",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Jenny Concha",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Daysi Cueva",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Irma Guerrero",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "Melania Morales",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "Rosalía Rodríguez",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Adriana Montes",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Hamilton Demera",
+   "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "Carla Zambrano",
+   "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "Carla Zambrano",
+   "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "Natacha Espinosa",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Petita Leonor Bajaña Tapia",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Fernando Gavilanes",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "Xiomara Girón",
+   "centro": "CM AMAZONAS"
+  }
+ ],
+ "fisioterapistas": [
+  {
+   "nombre": "Karen Oña",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "María José Molina",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Carolina Ortiz",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Alejandro Ubidia",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Mateo Flores",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Daniela Llumiquinga",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Dayana Ruano",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Jairo Villarreal",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Erick Vargas",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Chillig Grace",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Villarreal Yanez Cristofer",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "Stefany Chamorro",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Karen Loachamín",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Josselyne Salas",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Karen Salas",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Sanabria Altamirano",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Emily Dayan",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Alomia Rosero Guillermo Sebastian",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Castillo Chacon Johana Maithe",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Medina Guevara Jeromy Augusto",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Moran Caiza Gabriela Kimberlyn",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Palma Tinitana Raul Gabriel",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Suarez Tapia Michael Alejandro",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Mario Trujillo",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Verónica Vergara",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Esteban Castañeda",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Sebastián Andrade",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Marco Figueroa",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Diego Flores",
+   "centro": "CM QUICENTRO SUR"
+  },
+  {
+   "nombre": "Carlos Palma Cabrera",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "Joao Sellan Panchana",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "Vanessa Guerra Reyna",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "Andrade Cevallos Alexys Xavier",
+   "centro": "CM CUMBAYA"
+  },
+  {
+   "nombre": "CERON VILLARREAL PAOLA FERNANDA",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "MORENO SANTILLAN ALEJANDRO JAVIER",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "CORDOVA RODRIGUEZ VANESSA CAROLINA",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "ANDRADE GUERRA MANUEL ALEJANDRO",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "VILLARREAL YANEZ CRISTOFER DAMIAN",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "BOLAÑOS LIZANO STALIN DAVID",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "JACOME MERINO MARIA GABRIELA",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "CANDO DUMANCELA LESLYE PAOLA",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "POMAQUERO PINDA LORENA ELIZABETH",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "RAZA TEJADA WASHINGTON NIKOLAY",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "VIVAS PASPUEL SANTIAGO LEONARDO",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "GALINDO RUIZ JAIME FERNANDO",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "LAVERDE RIVERA KATHERINE LIZETH",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "OLEAS VANEGAS MICAELA CAROLINA",
+   "centro": "CM CHILLOS"
+  },
+  {
+   "nombre": "Hugo López",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Emily Franco",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Naila Huayamave",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Carrasco Isaac",
+   "centro": "CM ALBORADA"
+  }
  ],
  "productos": [
   {
@@ -4801,16 +5178,6 @@ window.CATALOGOS = {
   {
    "especialidad": "Fisioterapia",
    "categoria": "Reposición insumos/dispositivos",
-   "item": "Jabón líquido",
-   "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
-   "observacion": true
-  },
-  {
-   "especialidad": "Fisioterapia",
-   "categoria": "Reposición insumos/dispositivos",
    "item": "Aceite",
    "check": false,
    "cantidad": true,
@@ -4861,17 +5228,7 @@ window.CATALOGOS = {
   {
    "especialidad": "Fisioterapia",
    "categoria": "Reposición insumos/dispositivos",
-   "item": "Papel toalla",
-   "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
-   "observacion": true
-  },
-  {
-   "especialidad": "Fisioterapia",
-   "categoria": "Reposición insumos/dispositivos",
-   "item": "Papel higiénico",
+   "item": "Tóner",
    "check": false,
    "cantidad": true,
    "reposicion": true,
@@ -5119,8 +5476,8 @@ window.CATALOGOS = {
  ],
  "cocheQuincenal": [
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Epinefrina (Adrenalina) – 1 mg/ml (10 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Epinefrina (Adrenalina) - 1 mg/ml (10 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5128,8 +5485,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Atropina – 1 mg (5 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Atropina - 1 mg (5 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5137,8 +5494,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Amiodarona – 150 mg (5 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Amiodarona - 150 mg (5 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5146,8 +5503,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Lidocaína – 2% (5 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Dopamina - 200 mg (2 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5155,8 +5512,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Adenosina – 6 mg (5 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Norepinefrina - 4 mg (2 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5164,8 +5521,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Dopamina – 200 mg (2 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Adenosina - 6 mg (5 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5173,8 +5530,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Norepinefrina – 4 mg (2 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Lidocaína sin epinefrina - 2% (1 frasco)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5182,8 +5539,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Nitroglicerina – (2 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Gluconato de calcio - 1% (3 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5191,8 +5548,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Gluconato de calcio – 10% (3 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Sulfato de magnesio - 2% (3 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5200,8 +5557,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Sulfato de magnesio – 10% (3 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Bicarbonato de sodio - 8.4% (3 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5209,8 +5566,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Bicarbonato de sodio – 8.4% (5 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Furosemida - 20 mg (3 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5218,8 +5575,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Dextrosa – 50% (5 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Hidrocortisona - 100 mg (2 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5227,8 +5584,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Furosemida – 20 mg (3 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Naloxona - 0.4 mg (2 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5236,8 +5593,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Hidrocortisona – 100 mg (3 frascos)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Flumazenil - 0.5 mg (2 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5245,8 +5602,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Naloxona – 0.4 mg (2 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Diazepam - 10 mg (3 ampollas)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5254,8 +5611,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Flumazenil – 0.5 mg (2 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Salbutamol - 100 µg (1 inhalador)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5263,8 +5620,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN SUPERIOR: MEDICAMENTOS DE EMERGENCIA",
-   "item": "Diazepam – 10 mg (3 ampollas)",
+   "cajon": "CAJÓN DE MEDICAMENTOS DE EMERGENCIA",
+   "item": "Nitroglicerina - 50 mg (1 frasco)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5272,8 +5629,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Cánulas orofaríngeas (Tamaños 0,1,2,3,4,5)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Cánulas orofaríngeas - Tamaños 0, 1, 2, 3, 4 y 5 (1 caja o set)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5281,8 +5638,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Tubos endotraqueales (Tamaños 2.5 a 8.5)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Tubos endotraqueales - Tamaños 3.5 a 8.5 (2 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5290,8 +5647,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Laringoscopio (Hojas curvas/rectas 2, 3 y 4)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Laringoscopio - Hojas curvas (2, 3 y 4) (1 set)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5299,8 +5656,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Baterías para laringoscopio (repuestos)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Baterías para laringoscopio - Repuestos (según el equipo) (2 unidades)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5308,8 +5665,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Mascarillas laríngeas (Tamaños 3, 4 y 5)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Mascarillas laríngeas - Tamaños 3, 4 y 5 (1 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5317,8 +5674,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Guías para intubación",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Guías para intubación - (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5326,8 +5683,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Pinza de Magill",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Pinza de Magill - (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5335,8 +5692,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Jeringa 10 ml (inflado de balón)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Jeringa - 10 ml (inflado de balón) (2 unidades)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5344,8 +5701,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Material de fijación / Vendas",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Dispositivo de fijación de tubo endotraqueal - (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5353,8 +5710,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 1: VÍA AÉREA",
-   "item": "Resucitador manual (Adulto/Pediátrico con mascarillas)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Mascarillas de oxígeno - Adulto y pediátrico (1 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5362,8 +5719,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Catéteres intravenosos (Calibres 14,16,18,20,22 y 24)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Mascarillas de oxígeno con reservorio - (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5371,8 +5728,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Equipos de venoclisis (Macro y microgotero)",
+   "cajon": "CAJÓN DE VÍA AÉREA",
+   "item": "Cánula nasal de oxígeno - Adulto y pediátrico (1 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5380,8 +5737,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Llaves de tres vías",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Catéteres intravenosos - Calibres 14, 16, 18, 20, 22 y 24 (2 por calibre)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5389,8 +5746,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Extensiones para venoclisis",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Equipos de venoclisis - Macro y microgotero (2 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5398,8 +5755,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Jeringas (1,3,5,10,20,50 ml)",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Llaves de tres vías - (3 unidades)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5407,8 +5764,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Agujas (calibres variados)",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Extensiones para venoclisis - (2 unidades)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5416,8 +5773,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Torniquete",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Regulador de flujo intravenoso - (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5425,8 +5782,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Solución salina 0.9% (500/1000 ml (4 unidades))",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Jeringas - 1, 3, 5, 10 y 20 ml (3 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5434,8 +5791,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Lactato de Ringer (500/1000 ml (2 unidades))",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Jeringas 50 ml - Con pico y sin pico (1 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5443,8 +5800,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 2: ACCESO VASCULAR Y LÍQUIDOS",
-   "item": "Dextrosa 5% (500 ml (2 unidades))",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Agujas - Calibres 18, 19, 20, 21, 22, 23 G (5 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5452,8 +5809,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Electrodos de desfibrilación (Desechables)",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Torniquete - (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5461,8 +5818,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Gel conductor",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Solución salina 0.9% - 500 ml y 1000 ml (1 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5470,8 +5827,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Sondas nasogástricas (varios tamaños)",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Lactato de Ringer - 500 ml y 1000 ml (2 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5479,8 +5836,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Sondas vesicales (varios tamaños)",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Dextrosa 5% - 500 ml (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5488,8 +5845,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Guantes (estériles y no estériles)",
+   "cajon": "CAJÓN DE ACCESO VASCULAR Y LÍQUIDOS",
+   "item": "Dextrosa 50% - 500 ml (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5497,8 +5854,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Gasas estériles",
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Parches de desfibrilación - Adulto y pediátrico (desechables) (1 par de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5506,8 +5863,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Esparadrapo",
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Gel conductor - (1 unidad)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5515,8 +5872,8 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Tijeras",
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Sondas nasogástricas Levin - 12, 14, 16, 18, 20 fr (1 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5524,8 +5881,89 @@ window.CATALOGOS = {
    "observacion": true
   },
   {
-   "cajon": "CAJÓN 3: MATERIAL COMPLEMENTARIO",
-   "item": "Hojas de bisturí",
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Sondas de Foley - 10, 12, 14, 16, 18 fr (1 de cada uno)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Sondas de Nelaton - 6, 8, 10, 12, 16, 18 fr (1 de cada uno)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Fundas recolectoras - (2 unidades)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Guantes - Estériles (6, 6.5 7, 7.5, 8, 8.5) (2 de cada uno)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Guantes - No estériles (1 caja)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Gasas estériles - (10 paquetes)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Esparadrapo - Poroso y duro (1 rollo de cada uno)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Tijeras Lister - (1 unidad)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Hojas de bisturí - Números 11, 15 (2 de cada uno)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "CAJÓN DE MATERIAL COMPLEMENTARIO",
+   "item": "Resucitador manual (Ambú) - Adulto y pediátrico con mascarillas (1 de cada uno)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5534,7 +5972,7 @@ window.CATALOGOS = {
   },
   {
    "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
-   "item": "Desfibrilador/monitor con cables y electrodos (1)",
+   "item": "Desfibrilador / monitor cardíaco con cables y electrodos - (cantidad 1)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5543,7 +5981,7 @@ window.CATALOGOS = {
   },
   {
    "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
-   "item": "Aspirador de secreciones portátil (1)",
+   "item": "Tanque de oxígeno de 5 litros con manómetro y humidificador - (cantidad 1)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5552,7 +5990,7 @@ window.CATALOGOS = {
   },
   {
    "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
-   "item": "Tabla rígida para RCP (1)",
+   "item": "Aspirador de secreciones portátil con manguera de succión - (cantidad 1)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5561,7 +5999,7 @@ window.CATALOGOS = {
   },
   {
    "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
-   "item": "Estetoscopio (1)",
+   "item": "Tabla rígida para RCP - (cantidad 1)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5570,7 +6008,7 @@ window.CATALOGOS = {
   },
   {
    "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
-   "item": "Oxímetro de pulso portátil (1)",
+   "item": "Estetoscopio - (cantidad 1)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5579,7 +6017,25 @@ window.CATALOGOS = {
   },
   {
    "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
-   "item": "Termómetro (1)",
+   "item": "Esfingomanómetro o tensiómetro - (cantidad 1)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
+   "item": "Oxímetro de pulso portátil - (cantidad 1)",
+   "check": true,
+   "cantidad": true,
+   "reposicion": true,
+   "retirar": false,
+   "observacion": true
+  },
+  {
+   "cajon": "EQUIPO Y MATERIAL EXTERNO FUNCIONAL",
+   "item": "Termómetro - (cantidad 1)",
    "check": true,
    "cantidad": true,
    "reposicion": true,
@@ -5624,7 +6080,7 @@ window.CATALOGOS = {
   },
   {
    "cajon": "ACCIONES ADICIONALES",
-   "item": "Colocar nuevo sello de seguridad (Codigo:)",
+   "item": "Colocar nuevo sello de seguridad (Codigo)",
    "check": true,
    "cantidad": true,
    "reposicion": true,

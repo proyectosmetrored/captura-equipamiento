@@ -309,12 +309,55 @@
 <div id="printArea"></div>
 <script src="catalogos.js"></script>
 <script>
-/* ============================================================
-   App Equipamiento de Consultorios — Metrored
-   Lee los datos desde catalogos.js (window.CATALOGOS).
-   Los datos NO viven en este archivo: se administran en el Excel
-   y se regeneran a catalogos.js.
-   ============================================================ */
+/* ============================================================================
+   APP DE CAPTURA — Equipamiento de Consultorios (Metrored)
+   Para: auxiliares, enfermería y fisioterapia. Aquí se LLENA el checklist.
+   ----------------------------------------------------------------------------
+   DE DÓNDE SALEN LOS DATOS
+     1º  Flujo "Obtener catálogos" (CATALOGOS_URL) -> SharePoint, en vivo.
+     2º  Si ese flujo falla, usa catalogos.js (respaldo que va al lado
+         de este archivo). El respaldo se regenera desde SharePoint;
+         si queda viejo, la app muestra datos viejos cuando haya una caída.
+
+   DÓNDE SE GUARDA LO QUE SE REGISTRA
+     Flujo "Guardar registro" (REMOTE_URL) -> listas Registros (la cabecera)
+     y RegistroDetalle (una fila por ítem). Los registros son INALTERABLES:
+     nadie los edita ni borra a mano, ni siquiera desde SharePoint.
+
+   LOS DATOS NO VIVEN EN ESTE ARCHIVO
+     Centros, personas y productos se administran en el panel de administración.
+     Agregar un producto o una persona NUNCA debería requerir tocar este código.
+   ----------------------------------------------------------------------------
+   REGLAS PROPIAS DE ESTE PROYECTO (aprendidas a golpes, no las rompas)
+
+   · 5 interruptores por producto: Check / Cantidad / Reposición / Retirar /
+     Observación. Se prenden desde el panel, no aquí.
+
+   · Regla del "Cumple: No" -> los números (Cantidad/Reposición/Retirar) solo
+     se despliegan cuando marcan NO. La Observación SIEMPRE está visible.
+
+   · Zonas: el personal se comparte entre los centros de la MISMA ciudad
+     (ver CENTROS_GUAYAQUIL). Si abren un centro nuevo en Guayaquil, se
+     agrega a esa lista y se vuelve a publicar.
+
+   · El responsable se guarda en SU columna (Auxiliar / Enfermero /
+     Fisioterapista) según de qué lista salió -> ver claveResponsable().
+
+   · valSP(): las columnas tipo Opción de SharePoint no llegan como texto,
+     llegan como {Value:"Sí"} o [{Value:"Sí"}]. Por eso todo pasa por ahí.
+
+   · CACHE_KEY: los catálogos se guardan en el navegador para abrir rápido.
+     Si cambias la ESTRUCTURA de los datos, SUBE LA VERSIÓN (v3 -> v4) o los
+     equipos seguirán usando la foto vieja hasta que alguien borre su caché.
+
+   · Fecha y Hora se guardan como TEXTO con la hora de Ecuador, tomada al
+     momento de GUARDAR (no al abrir). CreadoISO es una marca técnica en UTC:
+     es normal que no coincida, sirve para verificar.
+
+   · En SharePoint: NUNCA borres y vuelvas a crear una columna. Cambia su
+     nombre interno (field_1, field_2...) y la app deja de leerla en silencio.
+     Si necesitas cambiarle el tipo, EDITA la columna existente.
+   ============================================================================ */
 
 /* --- CONFIG de envío (sin secretos en el cliente). TI lo activa luego. --- */
 const CONFIG = {
@@ -325,7 +368,7 @@ const CONFIG = {
 };
 const STORAGE_KEY = "equipamiento_registros_v2";
 const DRAFT_KEY   = "equipamiento_borrador_v2";   // autoguardado del registro en curso
-const CACHE_KEY   = "equipamiento_catalogos_v2";  // caché de catálogos (apertura instantánea) — v2: invalida cachés viejos
+const CACHE_KEY   = "equipamiento_catalogos_v3";  // caché de catálogos (apertura instantánea) — v3: invalida cachés con el coche de paro viejo/vacío
 
 let C = window.CATALOGOS || null;   // se reemplaza por los datos en vivo de SharePoint si están disponibles
 const $ = s => document.querySelector(s);
@@ -339,7 +382,11 @@ async function traerDeSharePoint(){
   const r = await fetch(CONFIG.CATALOGOS_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:"{}"});
   if(!r.ok) throw new Error("status "+r.status);
   const norm = normalizarSP(await r.json());
-  if(!(norm && norm.productos && norm.productos.length)) throw new Error("respuesta vacía");
+  // No aceptamos (ni cacheamos) un catálogo incompleto. Si una lista está siendo
+  // recreada en SharePoint, llegaría vacía y quedaría "congelada" en el caché.
+  const faltan = ["centros","especialidades","productos","lenceria","cocheDiario","cocheQuincenal"]
+    .filter(k => !(norm && norm[k] && norm[k].length));
+  if(faltan.length) throw new Error("catálogo incompleto: falta "+faltan.join(", "));
   try{ localStorage.setItem(CACHE_KEY, JSON.stringify(norm)); }catch(e){}
   norm.origen = "SharePoint (en vivo)";
   return norm;
@@ -422,6 +469,8 @@ function valSP(v){
 function normalizarSP(d){
   const si  = v => { const s=String(valSP(v)).trim().toLowerCase(); return ["sí","si","s","x","verdadero","true","1","yes"].includes(s); };
   const txt = v => String(valSP(v));
+  // "está apagado expresamente": vacío NO cuenta como No (así nada desaparece por estar en blanco)
+  const esNo = v => ["no","n","falso","false","0"].includes(String(valSP(v)).trim().toLowerCase());
   return {
     centros:        (d.centros||[]).filter(x=>si(x.field_1)).map(x=>x.Title),
     especialidades: (d.especialidades||[]).filter(x=>si(x.field_3)).map(x=>({nombre:x.Title, tieneCocheParo:si(x.field_1), esCritica:si(x.field_2)})),
@@ -432,27 +481,51 @@ function normalizarSP(d){
                       check:si(x.field_3), cantidad:si(x.field_4), reposicion:si(x.field_5), retirar:si(x.field_6), observacion:si(x.field_7)})),
     lenceria:       (d.lenceria||[]).filter(x=>si(x.field_7)).map(x=>({subgrupo:txt(x.field_1), item:x.Title,
                       check:si(x.field_2), cantidad:si(x.field_3), reposicion:si(x.field_4), retirar:si(x.field_5), observacion:si(x.field_6)})),
-    cocheDiario:    (d.cocheparo||[]).filter(x=>txt(x.field_1)==="Diario").map(x=>({tipo:txt(x.field_2)||"Ítem", item:x.Title,
+    // Coche de paro: field_8 = Activo. Se oculta SOLO si dice "No" expresamente.
+    // (vacío = visible, para que nada desaparezca si la columna aún no existe o está en blanco)
+    cocheDiario:    (d.cocheparo||[]).filter(x=>txt(x.field_1)==="Diario" && !esNo(x.field_8) && !esNo(x.Activo)).map(x=>({tipo:txt(x.field_2)||"Ítem", item:x.Title,
                       check:si(x.field_3), cantidad:si(x.field_4), reposicion:si(x.field_5), retirar:si(x.field_6), observacion:si(x.field_7)})),
-    cocheQuincenal: (d.cocheparo||[]).filter(x=>txt(x.field_1)==="Quincenal").map(x=>({cajon:txt(x.field_2), item:x.Title,
+    cocheQuincenal: (d.cocheparo||[]).filter(x=>txt(x.field_1)==="Quincenal" && !esNo(x.field_8) && !esNo(x.Activo)).map(x=>({cajon:txt(x.field_2), item:x.Title,
                       check:si(x.field_3), cantidad:si(x.field_4), reposicion:si(x.field_5), retirar:si(x.field_6), observacion:si(x.field_7)})),
   };
 }
 
-/* ---- Regla de RESPONSABLE: grupo según especialidad + filtro por centro ---- */
+/* ---- ZONAS (ciudades) ----------------------------------------------------
+   El personal se comparte entre los centros de la MISMA ciudad: si eliges un
+   centro de Guayaquil, salen las personas de los 3 centros de Guayaquil.
+   Para agregar un centro nuevo a Guayaquil, basta con sumarlo a esta lista.  */
+const CENTROS_GUAYAQUIL = ["CM KENNEDY", "CM ALBORADA", "CM CIUDAD CELESTE"];
+const zNorm  = s => String(s||"").trim().toUpperCase();
+const zonaDe = centro => CENTROS_GUAYAQUIL.some(c=>zNorm(c)===zNorm(centro)) ? "GUAYAQUIL" : "QUITO";
+
+/* ---- Regla de RESPONSABLE: grupo según especialidad + filtro por ciudad ---- */
 function grupoResp(esp){
   const e=(esp||"").trim().toLowerCase();
   if(e==="coche de paro") return {key:"enfermero",      label:"Responsable (Enfermero/a)",            plural:"enfermeros",      src:()=>C.enfermeros||[]};
   if(e==="fisioterapia")  return {key:"fisioterapista", label:"Responsable (Fisioterapista)",         plural:"fisioterapistas", src:()=>C.fisioterapistas||[]};
-  return                         {key:"auxiliar",       label:"Responsable (Auxiliar de enfermería)", plural:"auxiliares",      src:()=>C.personas||[]};
+  // Resto de especialidades: auxiliares Y enfermeros juntos.
+  return                         {key:"mixto",          label:"Responsable (Auxiliar o Enfermero/a)", plural:"auxiliares ni enfermeros",
+                                  src:()=>[...(C.personas||[]), ...(C.enfermeros||[])]};
+}
+
+/* Con la lista mixta hay que saber QUÉ es la persona elegida para guardarla en
+   su columna correcta (Auxiliar / Enfermero / Fisioterapista). */
+function claveResponsable(esp, nombre){
+  const k=grupoResp(esp).key;
+  if(k!=="mixto") return k;
+  const n=String(nombre||"").trim();
+  if(n && (C.enfermeros||[]).some(p=>p.nombre===n)) return "enfermero";
+  return "auxiliar";
 }
 function personalDelGrupoYCentro(){
   const centro=($("#centro").value||"").trim();
   const esp=($("#especialidad").value||"").trim();
   if(!centro || !esp) return [];                 // hasta elegir centro Y especialidad, no hay a quién mostrar
-  return grupoResp(esp).src().filter(p=>p.centro===centro);
+  const zona = zonaDe(centro);                   // se muestra el personal de toda la ciudad
+  return grupoResp(esp).src().filter(p=>p.centro && zonaDe(p.centro)===zona);
 }
-function opcionesResponsable(){ return personalDelGrupoYCentro().map(p=>p.nombre); }
+// sin repetidos (una misma persona puede estar cargada en más de un centro)
+function opcionesResponsable(){ return [...new Set(personalDelGrupoYCentro().map(p=>p.nombre))]; }
 function actualizarResponsable(){
   const esp=$("#especialidad").value;
   const grp=grupoResp(esp);
@@ -463,7 +536,7 @@ function actualizarResponsable(){
   if(!($("#centro").value||"").trim() || !esp){
     hint.textContent="Elige primero el centro y la especialidad."; hint.classList.remove("hide");
   }else if(opcionesResponsable().length===0){
-    hint.textContent="No hay "+grp.plural+" registrados para este centro."; hint.classList.remove("hide");
+    hint.textContent="No hay "+grp.plural+" registrados en "+(zonaDe($("#centro").value)==="GUAYAQUIL"?"Guayaquil":"Quito")+"."; hint.classList.remove("hide");
   }else{ hint.textContent=""; hint.classList.add("hide"); }
 }
 
@@ -728,11 +801,15 @@ function itemRow(p, id){
 
 function setCumple(btn,val){
   const tog=btn.parentElement;
-  setCumpleVal(tog,val);
+  // Volver a tocar la MISMA opción la des-marca: el ítem regresa a "sin evaluar" (en blanco).
+  // Así se puede corregir una equivocación sin tener que recargar todo el registro.
+  const nuevo = (tog.dataset.val === String(val)) ? "" : val;
+  setCumpleVal(tog,nuevo);
   const cond=tog.closest(".item").querySelector(".cond");
   if(cond){
-    cond.style.display = (val===false) ? "flex" : "none";
-    if(val===true) cond.querySelectorAll("input").forEach(i=>i.value="");  // al marcar Sí, limpia los numéricos
+    cond.style.display = (nuevo===false) ? "flex" : "none";
+    // si queda en Sí o en blanco, los numéricos se limpian (no aplican)
+    if(nuevo!==false) cond.querySelectorAll("input").forEach(i=>i.value="");
   }
   saveDraftSoon();
 }
@@ -782,6 +859,8 @@ function recolectar(){
   const P=x=>String(x).padStart(2,"0");
   const fechaLocal=`${n.getFullYear()}-${P(n.getMonth()+1)}-${P(n.getDate())}`;
   const horaLocal=`${P(n.getHours())}:${P(n.getMinutes())}`;
+  // En qué columna va el responsable (Auxiliar / Enfermero / Fisioterapista)
+  const claveResp = claveResponsable($("#especialidad").value, $("#responsable").value);
   return {
     id: "REG-"+n.getTime(),
     creadoISO: n.toISOString(),
@@ -791,9 +870,9 @@ function recolectar(){
     centro: $("#centro").value,
     especialidad: $("#especialidad").value,
     numeroConsultorio: $("#numConsultorio").value.trim(),
-    auxiliar:       grupoResp($("#especialidad").value).key==="auxiliar"       ? $("#responsable").value : "",
-    enfermero:      grupoResp($("#especialidad").value).key==="enfermero"      ? $("#responsable").value : "",
-    fisioterapista: grupoResp($("#especialidad").value).key==="fisioterapista" ? $("#responsable").value : "",
+    auxiliar:       claveResp==="auxiliar"       ? $("#responsable").value : "",
+    enfermero:      claveResp==="enfermero"      ? $("#responsable").value : "",
+    fisioterapista: claveResp==="fisioterapista" ? $("#responsable").value : "",
     observacionesGenerales: $("#obsGen").value.trim(),
     detalle
   };
