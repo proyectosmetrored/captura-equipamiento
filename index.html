@@ -230,7 +230,7 @@
           <select id="turno"><option value="">— elegir —</option><option>AM</option><option>PM</option></select>
         </div>
         <div>
-          <label for="responsable">Responsable</label>
+          <label class="req" for="responsable">Responsable</label>
           <input id="responsable" autocomplete="off" placeholder="🔎 Elige centro y especialidad primero">
           <div id="respHint" class="hint hide"></div>
         </div>
@@ -633,22 +633,40 @@ function setStep(n){
 function aPaso1(){ setStep(1); }
 function editarChecklist(){ setStep(2); }   // volver al checklist SIN reconstruirlo (conserva lo capturado)
 
-function aPaso2(){
-  const e1=$("#err1"); e1.classList.add("hide");
+/* Revisa los DATOS GENERALES. Devuelve [] si está todo bien, o la lista de problemas.
+   Se usa en DOS momentos: al pasar al checklist Y al guardar.
+
+   ¿Por qué también al guardar? Validar solo al inicio no alcanza. El 03/09/2026
+   se guardaron en producción 2 registros con 56 ítems de trabajo real pero SIN
+   centro, especialidad, consultorio ni responsable: si esos campos se vacían
+   después del Paso 1 (una recarga a medias, un borrador restaurado), el botón
+   Guardar los mandaba igual y el trabajo quedaba huérfano, sin poder atribuirlo
+   a ningún centro ni a ninguna persona. */
+function problemasGenerales(){
+  const problemas=[];
   const faltan=[];
   if(!$("#centro").value) faltan.push("Centro");
   if(!$("#especialidad").value) faltan.push("Especialidad");
   if(!$("#numConsultorio").value.trim()) faltan.push("N° de consultorio");
   if(!$("#turno").value) faltan.push("Turno");
+  if(!$("#responsable").value) faltan.push("Responsable");   // OBLIGATORIO: siempre hay que saber quién registró
   if(!$("#fecha").value) faltan.push("Fecha");
   if(!$("#hora").value) faltan.push("Hora");
-  if(faltan.length){ e1.textContent="Completa: "+faltan.join(", "); e1.classList.remove("hide"); return; }
-  // validar que lo escrito sea una opción real (los campos con búsqueda permiten texto libre)
+  if(faltan.length) problemas.push("Completa: "+faltan.join(", "));
+
+  // los campos con búsqueda permiten escribir libre: hay que confirmar que sea una opción real
   const malos=[];
   if($("#centro").value && !C.centros.includes($("#centro").value)) malos.push("Centro");
   if($("#especialidad").value && !C.especialidades.some(e=>e.nombre===$("#especialidad").value)) malos.push("Especialidad");
   if($("#responsable").value && !opcionesResponsable().includes($("#responsable").value)) malos.push("Responsable");
-  if(malos.length){ e1.textContent="Elige una opción válida de la lista en: "+malos.join(", "); e1.classList.remove("hide"); return; }
+  if(malos.length) problemas.push("Elige una opción válida de la lista en: "+malos.join(", "));
+  return problemas;
+}
+
+function aPaso2(){
+  const e1=$("#err1"); e1.classList.add("hide");
+  const problemas=problemasGenerales();
+  if(problemas.length){ e1.textContent=problemas[0]; e1.classList.remove("hide"); return; }
   const esp=$("#especialidad").value;
   // reconstruir SOLO si cambió la especialidad (así, al editar y volver, no se pierde lo capturado)
   if(checklistEsp!==esp || !$("#contenedorChecklist").children.length){ construirChecklist(esp); checklistEsp=esp; }
@@ -929,6 +947,15 @@ function kv(k,v){ return `<div class="kv"><span>${k}</span><b>${escHtml(String(v
 
 /* ---------- guardar ---------- */
 function guardar(){
+  // RED DE SEGURIDAD: nunca guardar sin los datos generales completos.
+  // Si algo falta, devuelve al Paso 1 con el aviso en vez de mandar un registro huérfano.
+  const problemas=problemasGenerales();
+  if(problemas.length){
+    setStep(1);
+    const e1=$("#err1"); e1.textContent=problemas[0]+" — no se guardó."; e1.classList.remove("hide");
+    toast("⚠️ Faltan datos generales");
+    return;
+  }
   const d=recolectar();
   if(!d) return;
   d.enviado=false; d.intentos=0;        // entra a la cola de envío
