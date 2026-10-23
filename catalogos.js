@@ -1,6 +1,6 @@
 /* Respaldo de catálogos — generado desde SharePoint. NO editar a mano. */
 window.CATALOGOS = {
- "generado": "2026-09-02 14:25 (desde SharePoint en vivo)",
+ "generado": "2026-10-23 11:56 (desde SharePoint en vivo)",
  "centros": [
   "CM AMAZONAS",
   "CM CALDERÓN",
@@ -12,7 +12,8 @@ window.CATALOGOS = {
   "CM QUICENTRO SUR",
   "CM ALBORADA",
   "CM KENNEDY",
-  "CM CIUDAD CELESTE"
+  "CM CIUDAD CELESTE",
+  "CM IÑAQUITO"
  ],
  "especialidades": [
   {
@@ -150,7 +151,7 @@ window.CATALOGOS = {
    "centro": "CM AMAZONAS"
   },
   {
-   "nombre": "Tania Alejandra Mendoza Arevalo",
+   "nombre": "Tania Alexandra Mendoza Arevalo",
    "centro": "CM AMAZONAS"
   },
   {
@@ -180,6 +181,30 @@ window.CATALOGOS = {
   {
    "nombre": "OROZCO GÉNESIS PAOLA",
    "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "GLORIA CESIBEL CORO CHINGUERSELA",
+   "centro": "CM IÑAQUITO"
+  },
+  {
+   "nombre": "CRISTINA ELIZABETH EGAS NAVARRETE",
+   "centro": "CM IÑAQUITO"
+  },
+  {
+   "nombre": "ADRIANA SARAHY SANDOVAL YANEZ",
+   "centro": "CM CAROLINA"
+  },
+  {
+   "nombre": "Katty Germania Zumba Bravo",
+   "centro": "CM CALDERÓN"
+  },
+  {
+   "nombre": "Toctaguano Chávez Dagner Brigitte",
+   "centro": "CM CONDADO"
+  },
+  {
+   "nombre": "Liceth Verónica Arteaga Males",
+   "centro": "CM AMAZONAS"
   }
  ],
  "enfermeros": [
@@ -286,6 +311,30 @@ window.CATALOGOS = {
   {
    "nombre": "Xiomara Girón",
    "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "Johanna  Mercedes Sánchez Mendoza",
+   "centro": "CM KENNEDY"
+  },
+  {
+   "nombre": "KAREN DANIELA CASTRO TIGSE",
+   "centro": "CM IÑAQUITO"
+  },
+  {
+   "nombre": "Johanna Sánchez",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Johanna Sánchez",
+   "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Selene Salome Pulles Morán",
+   "centro": "CM IÑAQUITO"
+  },
+  {
+   "nombre": "Basantes Fernández Allan Stefan",
+   "centro": "CM CONDADO"
   }
  ],
  "fisioterapistas": [
@@ -492,6 +541,34 @@ window.CATALOGOS = {
   {
    "nombre": "Carrasco Isaac",
    "centro": "CM ALBORADA"
+  },
+  {
+   "nombre": "Nathalya Ramírez González",
+   "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "Danna Belén Leones Zúñiga",
+   "centro": "CM CIUDAD CELESTE"
+  },
+  {
+   "nombre": "Alejandra Aldas",
+   "centro": "CM AMAZONAS"
+  },
+  {
+   "nombre": "YAGUANA TUABANDA ISAAC ALEJANDRO",
+   "centro": "CM IÑAQUITO"
+  },
+  {
+   "nombre": "LASSO VEGA ADRIANA PAOLA",
+   "centro": "CM IÑAQUITO"
+  },
+  {
+   "nombre": "MARTÍNEZ BETENCOURT KIMBERLY DENNISSE",
+   "centro": "CM IÑAQUITO"
+  },
+  {
+   "nombre": "LESLIE PAOLA CANDO DUMANCELA",
+   "centro": "CM IÑAQUITO"
   }
  ],
  "productos": [
@@ -5241,81 +5318,164 @@ window.CATALOGOS = {
    "subgrupo": "Lencería para uso en camillas:",
    "item": "Sábanas con resorte",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "Lencería para uso en camillas:",
    "item": "Sábanas sin resorte",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "Lencería para uso en camillas:",
    "item": "Fundas para almohadas",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "Lencería para uso en camillas:",
    "item": "Cobijas",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "Lencería para vestir al paciente:",
    "item": "Batas",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "Lencería para procedimientos clínicos o quirúrgicos:",
    "item": "Campos estándar",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "Lencería para procedimientos clínicos o quirúrgicos:",
    "item": "Campos fenestrados",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "Lencería para procedimientos clínicos o quirúrgicos:",
    "item": "Toallas",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   },
   {
    "subgrupo": "",
    "item": "Otros dependiendo del procedimiento: _________",
    "check": false,
-   "cantidad": true,
-   "reposicion": true,
-   "retirar": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  }
+ ],
+ "lavanderia": [
+  {
+   "subgrupo": "Lencería para uso en camillas:",
+   "item": "Sábanas con resorte",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "Lencería para uso en camillas:",
+   "item": "Sábanas sin resorte",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "Lencería para uso en camillas:",
+   "item": "Fundas para almohadas",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "Lencería para uso en camillas:",
+   "item": "Cobijas",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "Lencería para vestir al paciente:",
+   "item": "Batas",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "Lencería para procedimientos clínicos o quirúrgicos:",
+   "item": "Campos estándar",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "Lencería para procedimientos clínicos o quirúrgicos:",
+   "item": "Campos fenestrados",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "Lencería para procedimientos clínicos o quirúrgicos:",
+   "item": "Toallas",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
+   "observacion": true
+  },
+  {
+   "subgrupo": "",
+   "item": "Otros dependiendo del procedimiento: _________",
+   "check": false,
+   "cantidad": false,
+   "reposicion": false,
+   "retirar": true,
    "observacion": true
   }
  ],

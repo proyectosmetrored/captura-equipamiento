@@ -368,7 +368,7 @@ const CONFIG = {
 };
 const STORAGE_KEY = "equipamiento_registros_v2";
 const DRAFT_KEY   = "equipamiento_borrador_v2";   // autoguardado del registro en curso
-const CACHE_KEY   = "equipamiento_catalogos_v3";  // caché de catálogos (apertura instantánea) — v3: invalida cachés con el coche de paro viejo/vacío
+const CACHE_KEY   = "equipamiento_catalogos_v4";  // caché de catálogos (apertura instantánea) — v4: invalida cachés sin la lista de Lavandería
 
 let C = window.CATALOGOS || null;   // se reemplaza por los datos en vivo de SharePoint si están disponibles
 const $ = s => document.querySelector(s);
@@ -384,7 +384,7 @@ async function traerDeSharePoint(){
   const norm = normalizarSP(await r.json());
   // No aceptamos (ni cacheamos) un catálogo incompleto. Si una lista está siendo
   // recreada en SharePoint, llegaría vacía y quedaría "congelada" en el caché.
-  const faltan = ["centros","especialidades","productos","lenceria","cocheDiario","cocheQuincenal"]
+  const faltan = ["centros","especialidades","productos","lenceria","lavanderia","cocheDiario","cocheQuincenal"]
     .filter(k => !(norm && norm[k] && norm[k].length));
   if(faltan.length) throw new Error("catálogo incompleto: falta "+faltan.join(", "));
   try{ localStorage.setItem(CACHE_KEY, JSON.stringify(norm)); }catch(e){}
@@ -480,6 +480,9 @@ function normalizarSP(d){
     productos:      (d.productos||[]).filter(x=>si(x.field_8)).map(x=>({especialidad:txt(x.field_1), categoria:txt(x.field_2), item:x.Title,
                       check:si(x.field_3), cantidad:si(x.field_4), reposicion:si(x.field_5), retirar:si(x.field_6), observacion:si(x.field_7)})),
     lenceria:       (d.lenceria||[]).filter(x=>si(x.field_7)).map(x=>({subgrupo:txt(x.field_1), item:x.Title,
+                      check:si(x.field_2), cantidad:si(x.field_3), reposicion:si(x.field_4), retirar:si(x.field_5), observacion:si(x.field_6)})),
+    // Lavandería: lista Cat_Lavanderia, misma estructura que Cat_Lenceria (Item, Subgrupo, 5 interruptores, Activo)
+    lavanderia:     (d.lavanderia||[]).filter(x=>si(x.field_7)).map(x=>({subgrupo:txt(x.field_1), item:x.Title,
                       check:si(x.field_2), cantidad:si(x.field_3), reposicion:si(x.field_4), retirar:si(x.field_5), observacion:si(x.field_6)})),
     // Coche de paro: field_8 = Activo. Se oculta SOLO si dice "No" expresamente.
     // (vacío = visible, para que nada desaparezca si la columna aún no existe o está en blanco)
@@ -721,7 +724,7 @@ function construirChecklist(especialidad){
       cont.appendChild(acordeon("🧰 Coche de paro — Quincenal", C.cocheQuincenal.length, filas, "cat:CocheQuincenal"));
     }
   } else {
-    // ===== ESPECIALIDAD NORMAL: productos por categoría + cambio de lencería =====
+    // ===== ESPECIALIDAD NORMAL: productos por categoría + cambio de lencería + lavandería =====
     const {cats,grupos}=grupoCategorias(especialidad);
     cats.forEach(cat=>{
       const items=grupos[cat];
@@ -735,6 +738,16 @@ function construirChecklist(especialidad){
       });
       cont.appendChild(acordeon("🧺 Cambio de lencería", C.lenceria.length, filas, "cat:Lenceria"));
     }
+    // Lavandería: igual que lencería (misma estructura, lista propia), en todas las especialidades normales
+    const lav=C.lavanderia||[];
+    if(lav.length){
+      const filas=[]; let sub=null;
+      lav.forEach(p=>{
+        if(p.subgrupo && p.subgrupo!==sub){ sub=p.subgrupo; filas.push(subHeader(sub)); }
+        filas.push(itemRow({...p,categoria:"Lavandería"}, "LV"+(idx++)));
+      });
+      cont.appendChild(acordeon("🫧 Lavandería", lav.length, filas, "cat:Lavanderia"));
+    }
   }
 
   if(!cont.children.length){
@@ -747,6 +760,8 @@ function catIcon(c){
   if(c.startsWith("Verif")) return "🔧";
   if(c.startsWith("Revis")) return "♻️";
   if(c.startsWith("Repos")) return "📦";
+  if(c.startsWith("Cambio de lenc")) return "🧺";
+  if(c.startsWith("Lavand")) return "🫧";
   return "📋";
 }
 
