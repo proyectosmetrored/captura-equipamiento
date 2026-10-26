@@ -473,7 +473,10 @@ function normalizarSP(d){
   const esNo = v => ["no","n","falso","false","0"].includes(String(valSP(v)).trim().toLowerCase());
   return {
     centros:        (d.centros||[]).filter(x=>si(x.field_1)).map(x=>x.Title),
-    especialidades: (d.especialidades||[]).filter(x=>si(x.field_3)).map(x=>({nombre:x.Title, tieneCocheParo:si(x.field_1), esCritica:si(x.field_2)})),
+    // TieneLavanderia: columna creada a mano en Cat_Especialidades (nombre interno "TieneLavanderia";
+    // se acepta también field_4 por si algún día se recrea la lista desde CSV). Vacío = No.
+    especialidades: (d.especialidades||[]).filter(x=>si(x.field_3)).map(x=>({nombre:x.Title, tieneCocheParo:si(x.field_1), esCritica:si(x.field_2),
+                      tieneLavanderia: si(x.TieneLavanderia) || si(x.field_4)})),
     personas:       (d.auxiliares||d.personas||[]).filter(x=>si(x.field_2)).map(x=>({nombre:x.Title, centro:txt(x.field_1)})),
     enfermeros:     (d.enfermeros||[]).filter(x=>si(x.field_2)).map(x=>({nombre:x.Title, centro:txt(x.field_1)})),
     fisioterapistas:(d.fisioterapistas||[]).filter(x=>si(x.field_2)).map(x=>({nombre:x.Title, centro:txt(x.field_1)})),
@@ -723,8 +726,19 @@ function construirChecklist(especialidad){
       });
       cont.appendChild(acordeon("🧰 Coche de paro — Quincenal", C.cocheQuincenal.length, filas, "cat:CocheQuincenal"));
     }
+  } else if(esp.tieneLavanderia){
+    // ===== ESPECIALIDAD "LAVANDERÍA" (aparte, como el coche de paro): solo las prendas de Cat_Lavanderia =====
+    const lav=C.lavanderia||[];
+    if(lav.length){
+      const filas=[]; let sub=null;
+      lav.forEach(p=>{
+        if(p.subgrupo && p.subgrupo!==sub){ sub=p.subgrupo; filas.push(subHeader(sub)); }
+        filas.push(itemRow({...p,categoria:"Lavandería"}, "LV"+(idx++)));
+      });
+      cont.appendChild(acordeon("🫧 Lavandería", lav.length, filas, "cat:Lavanderia"));
+    }
   } else {
-    // ===== ESPECIALIDAD NORMAL: productos por categoría + cambio de lencería + lavandería =====
+    // ===== ESPECIALIDAD NORMAL: productos por categoría + cambio de lencería =====
     const {cats,grupos}=grupoCategorias(especialidad);
     cats.forEach(cat=>{
       const items=grupos[cat];
@@ -737,16 +751,6 @@ function construirChecklist(especialidad){
         filas.push(itemRow({...p,categoria:"Cambio de lencería"}, "L"+(idx++)));
       });
       cont.appendChild(acordeon("🧺 Cambio de lencería", C.lenceria.length, filas, "cat:Lenceria"));
-    }
-    // Lavandería: igual que lencería (misma estructura, lista propia), en todas las especialidades normales
-    const lav=C.lavanderia||[];
-    if(lav.length){
-      const filas=[]; let sub=null;
-      lav.forEach(p=>{
-        if(p.subgrupo && p.subgrupo!==sub){ sub=p.subgrupo; filas.push(subHeader(sub)); }
-        filas.push(itemRow({...p,categoria:"Lavandería"}, "LV"+(idx++)));
-      });
-      cont.appendChild(acordeon("🫧 Lavandería", lav.length, filas, "cat:Lavanderia"));
     }
   }
 

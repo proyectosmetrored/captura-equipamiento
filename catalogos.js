@@ -1,6 +1,6 @@
 /* Respaldo de catálogos — generado desde SharePoint. NO editar a mano. */
 window.CATALOGOS = {
- "generado": "2026-10-23 11:56 (desde SharePoint en vivo)",
+ "generado": "2026-10-25 19:41 (desde SharePoint en vivo)",
  "centros": [
   "CM AMAZONAS",
   "CM CALDERÓN",
@@ -19,62 +19,80 @@ window.CATALOGOS = {
   {
    "nombre": "Consultorio general, varias",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Ginecología",
    "tieneCocheParo": false,
-   "esCritica": true
+   "esCritica": true,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Rayos X",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Ecografía",
    "tieneCocheParo": false,
-   "esCritica": true
+   "esCritica": true,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Endoscopía",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Cardiología",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Procedimientos",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Esterilización",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Mamografía",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Tomografía",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Fisioterapia",
    "tieneCocheParo": false,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
   },
   {
    "nombre": "Coche de paro",
    "tieneCocheParo": true,
-   "esCritica": false
+   "esCritica": false,
+   "tieneLavanderia": false
+  },
+  {
+   "nombre": "Lavandería",
+   "tieneCocheParo": false,
+   "esCritica": false,
+   "tieneLavanderia": true
   }
  ],
  "personas": [
